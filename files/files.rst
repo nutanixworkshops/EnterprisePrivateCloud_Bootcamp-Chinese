@@ -36,28 +36,43 @@ In this exercise you will create and test a SMB share, used to support the unstr
 Creating the Share
 ..................
 
-#. In **Prism Element > File Server**, click **+ Share/Export**.
+Configuring SMB Home Share
++++++++++++++++++++++++++++
 
-#. Fill out the following fields:
+In **Prism** > **File Server**, click **+Share/Export**. 
 
-   - **Name** - *Initials*\ **-FiestaShare**
-   - **Description (Optional)** - Fiesta app team share, used by PM, ENG, and MKT
-   - **File Server** - **BootcampFS**
-   - **Share Path (Optional)** - Leave blank. This field allows you to specify an existing path in which to create the nested share.
-   - **Max Size (Optional)** - 200GiB
-   - **Select Protocol** - SMB
+Fill out the following fields and click Next:
+- **Name** – home
+- **File Server**- POCxx-Files
+- **Select Protocol** - SMB
+ 
+ 
+.. image:: images/image019.png
 
-   .. figure:: images/2.png
 
-   Because this is a single node AOS cluster and therefore a single file server VM, all shares will be **Standard** shares. A Standard share means that all top level directories and files within the share, as well as connections to the share, are served from a single file server VM.
+Select **Enable Access Based Enumeration (ABE)**, **Self Service Restore** and **Advanced Settings**. Select **Home directory and User Profiles** and click **next**
 
-   If this were a three node Files cluster or larger you’d have an option to create a **Distributed** share.  Distributed shares are appropriate for home directories, user profiles, and application folders. This type of share shards top level directories across all Files VMs and load balances connections across all Files VMs within the Files cluster.
 
-#. Click **Next**.
+.. image:: images/image020.png
 
-#. Select **Enable Access Based Enumeration** and **Self Service Restore**. Select **Blocked File Types** and enter a comma separated list of extensions like .flv,.mov.
 
-   .. figure:: images/3.png
+Review Summary tab and click **create**
+ 
+ 
+.. image:: images/image021.png
+
+
+Login to your **Windows tool VM** , add domain *ntnxlab.local*, restart this windows VM and login in with AD administrator credentials, test the avaiability of the share you created. If home share \\\\10.42.xx.152\\home is avaiable, create a new folder named **marketing** under home share.
+
+
+.. image:: images/24.png
+
+
+
+
+.. image:: images/image023.png
+
+
 
    .. note::
 
@@ -91,22 +106,7 @@ Creating the Share
 Testing the Share
 .................
 
-#. Connect to your *Initials*\ **-WinTools** VM via VM console as a **non-Administrator NTNXLAB** domain account:
 
-   .. note::
-
-      You will not be able to connect using these accounts via RDP.
-
-   - user01 - user25
-   - devuser01 - devuser25
-   - operator01 - operator25
-   - **Password** nutanix/4u
-
-   .. figure:: images/16.png
-
-   .. note::
-
-     The Windows Tools VM has already been joined to the **NTNXLAB.local** domain. You could use any domain joined VM to complete the following steps.
 
 #. Open ``\\BootcampFS.ntnxlab.local\`` in **File Explorer**.
 

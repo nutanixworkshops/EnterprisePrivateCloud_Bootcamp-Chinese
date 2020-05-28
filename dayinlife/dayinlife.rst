@@ -1,80 +1,51 @@
 .. _dayinlife:
 
 -----------------
-A Day in the Life
+日常的一天
 -----------------
 
-In this lab you will follow a day in the life of Carol O'Kay, a 10 year veteran of administrating virtual environments on 3-tier architecture, who has recently deployed her first Nutanix cluster. The Nutanix cluster is being used for a mix of production IT workloads, and supporting the engineering efforts for her company's primary application, an inventory management solution called Fiesta, used to support the company's retail storefronts.
+
+在本实验中，您将了解Carol O'Kay的生活，他是在3层架构上管理虚拟环境10年的资深人士，她最近部署了她的第一个Nutanix集群。 Nutanix群集用于混合生产IT工作负载，并支持其公司主要应用程序的工程工作，该程序是称为Fiesta的库存管理解决方案，用于支持公司的零售店面。
 
 .. note::
 
-   If there are multiple people utilizing the same Nutanix cluster to complete this lab, certain steps may have already been completed. If this occurs, just skip that particular step, and continue on with the lab after you've verified the step(s) was completed correctly.
+   如果有多个人使用同一个Nutanix群集来完成此实验，则某些步骤可能已经完成。 如果发生这种情况，请跳过该特定步骤，并在确认步骤正确完成后继续进行实验。
 
-Configuring Storage
+配置存储
 +++++++++++++++++++
 
-In this brief exercise, you will experience how IT generalists can provision and monitor primary storage for their virtualized environment through Prism with just a few clicks - a stark contrast to planning and managing traditional SAN storage.
+在此简短的练习中，您将体验IT专家如何通过Prism只需单击几下即可通过Prism为虚拟化环境配置和监视主存储，这与规划和管理传统SAN存储形成了鲜明的对比。
 
-#. Using your **Cluster Assignment Spreadsheet**, identify your **Prism Element** cluster IP.
+#. 使用您的 **集群分配表格**，确定您的 **Prism Element** 集群IP。
 
-#. In a browser, open **Prism Element** and log in using the following local user credentials:
+#. 在浏览器中，打开 **Prism Element** 并使用以下本地用户凭据登录：
 
    - **Username** - admin
    - **Password** - *HPOC Password*
 
    .. figure:: images/1.png
 
-#. Select **Storage** from the drop down menu.
+#. 从下拉菜单中选择 **Storage** 。
 
    .. figure:: images/2.png
 
-#. Mouse over the **Storage Summary** and **Capacity Optimization** widgets for explanations of what each is displaying.
+#. 将鼠标悬停在 **Storage Summary** 和 **Capacity Optimization** 小部件上，以解释每个显示的内容。
 
-   It's important to understand that Nutanix considers the **Data Reduction** ratio as savings ONLY from compression, deduplication, and erasure coding. The **Overall Efficiency**, comparable to what many other vendors consider "Data Reduction," incorporates the aforementioned data efficiency features, as well as data avoidance features like thin provisioning, intelligent cloning, and zero suppression.
+   重要的是要理解Nutanix认为 **Data Reduction** 比率仅来自压缩、重复数据删除和擦除编码的节省。 与许多其他供应商认为的“数据缩减”相比，**Overall Efficiency** 具有上述数据效率功能以及诸如精简配置，智能克隆和零抑制之类的数据避免功能。
 
    .. figure:: images/3.png
 
-#. Select **Table** and click **+ Storage Container**.
+#. 选择 **Table** 并点击 **+ Storage Container**.
 
-   Storage Containers represent logical policies for storage, allowing you to create reservations, enable/disable data efficiency features like compression, deduplication, and erasure coding, and to configure Redundancy Factor (RF). Every Storage Container on a Nutanix cluster still leverages all physical disks within the cluster, referred to as the Storage Pool. A typical Nutanix cluster will have a small number of Storage Containers, typically corresponding to workloads that benefit from different data efficiency technologies.
+   存储容器代表用于存储的逻辑策略，使您可以创建保留，启用/禁用压缩，重复数据删除和擦除编码等数据效率功能，并配置冗余因子（RF）。 Nutanix群集上的每个存储容器仍会利用群集内的所有物理磁盘，称为存储池。 典型的Nutanix群集将具有少量的存储容器，通常对应于受益于不同数据效率技术的工作负载。
 
    .. figure:: images/4.png
 
-#. Provide a unique **Name** for the **Storage Container**, and click **Advanced Settings** to explore additional configuration options.
+#. 为 **Storage Container** 提供唯一的 **Name** ，然后单击 **Advanced Settings** 以浏览其他配置选项。
 
    .. figure:: images/5.png
 
-   Nutanix provides different ways to optimize storage capacity that are intelligent and adaptive to workloads characteristics. Nutanix uses native data avoidance (thin provisioning, intelligent cloning and zero suppression) and data reduction (compression, deduplication, and erasure coding) techniques to handle data efficiently. All data reduction optimizations are performed at the container level, so different containers can use different settings.
-
-   **Compression**
-
-      Nutanix provides two choices - inline or post-process data compression. Irrespective of inline or post-process compression, write data coming into OpLog that is >4k and shows good compression, will be written compressed in OpLog. For inline compression (Delay=0), sequential streams of data or large size I/Os (>64K) will be compressed when writing to the Extent Store. For post-process (Delay > 0), data is compressed after it is drained from OpLog to the Extent Store, after compression delay is met.
-
-      Compression provides on-disk space savings for applications such as databases, and results in a lower number of writes being written to storage. Post-process compression is turned ON by default on all containers. Starting 5.18, inline compression will be turned ON by default on all containers. We recommend turning ON inline compression for almost all use cases. Workloads not ideal for compression are encrypted datasets or already compressed datasets.
-
-   **Erasure Coding**
-
-      To provide a balance between availability and the amount of storage required, Distributed Storage Fabric (DSF) provides the ability to encode data using erasure codes (EC). Like RAID (levels 4, 5, 6, etc.) where parity is calculated, EC encodes a strip of data blocks across different nodes and calculates parity. In the event of a host and/or disk failure, the parity data is used to calculate any missing data blocks (decoding).  In the case of DSF, the data block must be on a different node and belong to a different vDisk. EC is a post-process operation and is done on write cold data (Data that hasn’t been overwritten in more than 7 days). The number of data and parity blocks in a strip is chosen by the system based on number of nodes and configured failures to tolerate.
-
-      Turn on EC-X for non-mission-critical workloads and workloads that have a significant amount of write cold data, since erasure coding works on write cold data and provides more usable storage. For more information refer to `application specific best practice guides <https://portal.nutanix.com/page/documents/solutions/list/>`_.
-
-   **Deduplication**
-
-      When enabled, Distributed Storage Fabric (DSF) does capacity-tier and performance-tier deduplication. Data is fingerprinted on ingest using a SHA-1 hash that is stored as metadata. When duplicate data is detected based on multiple copies with the same fingerprint, a background process removes the duplicates. When deduplicated data is read, it is placed in a unified cache, and any subsequent requests for data with the same fingerprint are satisfied directly from cache.
-
-      Deduplication is recommended for full clones, P2V migrations and Persistent Desktops.
-
-   **Redundancy Factor**
-
-      Redundancy Factor controls the number of data copies. Observe that the Redundancy Factor cannot be configured for this cluster, this is due to the minimum number of nodes required to support RF3 is 5.
-
-   .. note::
-
-      For more information on how Nutanix protects your data or implements data reduction, click the diagram below to review the relevant section of the Nutanix Bible.
-
-      .. figure:: https://nutanixbible.com/imagesv2/data_protection.png
-         :target: https://nutanixbible.com/#anchor-book-of-acropolis-data-protection
-         :alt: Nutanix Bible - Data Protection
+   Nutanix提供了多种优化存储容量的方法，这些方法可以智能地适应工作负载的特性。 Nutanix使用原生数据节省（精简配置，智能克隆和零抑制）和数据缩减（压缩，重复数据删除和纠删码）技术来有效处理数据。 所有数据缩减优化均在容器级别执行，因此不同的容器可以使用不同的设置。
 
 #. Click **Save** to create the storage and mount it to all available hosts within the cluster.
 
