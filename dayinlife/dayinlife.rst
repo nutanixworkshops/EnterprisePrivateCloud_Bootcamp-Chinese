@@ -377,7 +377,9 @@ You can use Blueprints to model applications of various complexities; from simpl
 
 While developer users will have the ability to create and publish their own Blueprints, Carol wants to provide a common Fiesta Blueprint used by the team.
 
+
 #. `Download the Fiesta-Multi Blueprint by right-clicking here <https://raw.githubusercontent.com/nutanixworkshops/EnterprisePrivateCloud_Bootcamp-chinese/master/dayinlife/Fiesta-Multi.json>`_.
+
 
 #. From **Prism Central > Calm**, select **Blueprints** from the lefthand menu and click **Upload Blueprint**.
 
