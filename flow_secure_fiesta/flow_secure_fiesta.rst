@@ -1,286 +1,286 @@
 .. _pcflow_secure_fiesta:
 
 -------------------------------
-Securing Applications with Flow
+使用Flow保护应用程序
 -------------------------------
 
-Flow is an application-centric network security product tightly integrated into Nutanix AHV and Prism Central. Flow provides rich network traffic visualization, automation, and security for VMs running on AHV.
+     Flow是一款以应用程序为中心的网络安全产品，已紧密集成到Nutanix AHV和Prism Central中。Flow为在AHV上运行的VM提供了丰富的网络流量可视化、自动化和安全的功能。
 
-Microsegmentation is a component of Flow that uses simple policy-based management to secure VM networking. Using Prism Central categories (logical groups), you can create a powerful distributed firewall. Combining this with Calm allows automated deployment of applications that are secured as they are created.
+     微分段是Flow的一种特性，它使用基于策略的简单管理的方式来保护虚拟化环境中的网络安全。使用Prism Central的“类别（逻辑组）”功能，可以创建功能强大的分布式防火墙。它还可以与Calm结合使用，可在创建虚拟机或在虚拟机环境中部署应用的时候，就可以自动为需要保护的应用程序提供可靠的安全保护策略。
 
-**In this exercise you will restrict access to the Fiesta application and protect traffic between the application tiers.**
+**在本练习中，您将限制对Fiesta应用程序之间的访问，并保护应用程序之间的通信流量。**
 
-Securing the Fiesta Application
+保护Fiesta应用程序
 +++++++++++++++++++++++
 
-Flow provides multiple System categories out of the box, such as AppType, AppTier, and Environment, that are used to quickly group virtual machines. Security policies are applied using these categories. You can start using these pre-existing categories right away, or add your own categories for custom grouping.
+Flow提供了多种开箱即用的“类别”，例如AppType，AppTier和Environment，可用于快速对虚拟机进行分组。我们使用这些类别，应用于安全策略。您可以立即使用这些预设的类别，也可以添加自己的类别，以进行自定义分组。
 
-Defining Category Values
+定义类别值
 ........................
 
-Prism Central uses categories as metadata to tag VMs to determine how policies will be applied.
+Prism Central使用类别作为元数据来标记VM，以确定如何应用策略。
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Categories**.
+#. 在 **Prism Central** 中, 选择 :fa:`bars` **> Virtual Infrastructure > Categories**.
 
-#. Select the checkbox for **AppType** and click **Actions > Update**.
+#. 选中 **AppType** 并点击 **Actions > Update**.
 
    .. figure:: images/12.png
 
-#. Click the :fa:`plus-circle` icon beside the last value to add an additional Category value.
+#. 点击最后一个值旁边的 :fa:`plus-circle` 图标以添加其他类别的值。
 
-#. Specify *Initials*-**Fiesta**  as the value name.
+#. 将 *Initials*-**Fiesta**  指定为值名称。
 
    .. figure:: images/13.png
 
-#. Click **Save**.
+#. 点击 **Save**.
 
-#. Select the checkbox for **AppTier** and click **Actions > Update**.
+#. 选择 **AppTier** 并点击 **Actions > Update**.
 
-#. Click the :fa:`plus-circle` icon beside the last value to add an additional Category value.
+#. 点击最后一个值旁边的 :fa:`plus-circle` 图标以添加其他类别值。
 
-#. Specify *Initials*-**Web**  as the value name. This category will be applied to the application's web tier.
+#. 指定 *Initials*-**Web**  作为值名称。此类别将应用于应用程序的Web层。
 
-#. Click :fa:`plus-circle` and specify *Initials*-**DB**. This category will be applied to the application's MySQL database tier.
+#. 点击 :fa:`plus-circle` 并指定Initials - DB。此类别将应用于应用程序的MySQL数据库层。
 
    .. figure:: images/14.png
 
-#. Click **Save**.
+#. 点击 **Save**.
 
-Creating a Security Policy
+创建安全策略
 ..........................
 
-Nutanix Flow includes a policy-driven security framework that uses a workload-centric approach instead of a network-centric approach. Therefore, it can scrutinize traffic to and from VMs no matter how their network configurations change and where they reside in the data center. The workload-centric, network-agnostic approach also enables the virtualization team to implement these security policies without having to rely on network security teams.
+     Nutanix Flow拥有一个策略驱动的安全框架，该框架使用以工作负载为中心的方法，而不是以网络为中心的方法。因此，无论网络配置如何更改，以及VM在数据中心中的位置在哪里，Flow都可以检查往返VM的流量。以工作负载为中心，与网络无关的策略，使得虚拟化团队能够自己部署这些安全策略，而不必依赖网络安全团队。
 
-Security policies are applied to categories and not to the VMs themselves. Therefore, it does not matter how many VMs are started up in a given category. Traffic associated with the VMs in a category is secured without administrative intervention, at any scale.
+     安全策略基于类别，而不基于VM本身。因此，在给定类别中添加多少个VM无关紧要。
 
-Create the security policies that will protect the Fiesta application.
+     创建将保护Fiesta应用程序的安全策略。
 
-#. In **Prism Central**, select :fa:`bars` **> Policies > Security Policies**.
+#. 在 **Prism Central** 中, 选择 :fa:`bars` **> Policies > Security Policies**.
 
-#. Click **Create Security Policy > Secure Applications (App Policy) > Create**.
+#. 点击 **Create Security Policy > Secure Applications (App Policy) > Create**.
 
-#. Fill out the following fields:
+#. 填写以下字段：
 
    - **Name** - *Initials*-Fiesta
    - **Purpose** - Restrict unnecessary access to Fiesta
    - **Secure this app** - AppType: *Initials*-Fiesta
-   - Do **NOT** select **Filter the app type by category**.
+   - 千万 **不要** 选择 **Filter the app type by category**.
 
    .. figure:: images/18.png
 
-#. Click **Next**.
+#. 点击 **Next**
 
-#. If prompted, click **OK, Got it!** on the tutorial diagram of the **Create App Security Policy** wizard.
+#. 如果出现提示，就在 **Create App Security Policy** 向导的教程图中，选择 **OK, Got it!**
 
-#. To allow for more granular configuration of the security policy, click **Set rules on App Tiers, instead** rather than applying the same rules to all components of the application.
+#. 为了更详细地配置安全策略，请单击 **Set rules on App Tiers, instead** 而不是将相同的规则应用于应用程序的所有组件。
 
    .. figure:: images/19.png
 
-#. Click **+ Add Tier**.
+#. 点击 **+ Add Tier**.
 
-#. Select **AppTier:**\ *Initials*-**Web** from the drop down.
+#. 在下拉列表中选择 **AppTier:**\ *Initials*-**Web** .
 
-#. Repeat Steps 7-8 for **AppTier:**\ *Initials*-**DB**.
+#. 对 **AppTier:**\ *Initials*-**DB** 重复步骤 7-8 .
 
    .. figure:: images/20.png
 
-   Next you will define the **Inbound** rules, which control which sources you will allow to communicate with your application. You can allow all inbound traffic, or define whitelisted sources. By default, the security policy is set to deny all incoming traffic.
+     接下来，您将定义入站（inbound）规则，该规则控制允许与应用程序进行通信的源。您可以允许所有入站流量，或定义列入白名单的访问来源。默认情况下，安全策略设置为拒绝所有的如站流量。
 
-   In this scenario we want to allow inbound TCP traffic to the web tier on TCP port 80 from all clients.
+     在这种情况下，我们要允许从所有客户端到TCP端口80上的Web层的入站TCP通信。
 
-#. Under **Inbound**, click **+ Add Source**.
+#. 在 **Inbound**, 点击 **+ Add Source**.
 
-#. Fill out the following fields to allow all inbound IP addresses:
+#. 填写以下字段以允许所有入站IP地址:
 
-   - **Add source by:** - Select **Subnet/IP**
-   - Specify **0.0.0.0/0**
+   - **Add source by:** - 选择 **Subnet/IP**
+   - 指定 **0.0.0.0/0**
 
-   .. note::
+   .. 注意::
 
-     Sources can also be specified by Categories, allowing for greater flexibility as this data can follow a VM regardless of changes to its network location.
+     来源也可以按类别指定，以增强灵活性，因为安全策略可以跟随VM移动而移动，无论VM在网络中的什么位置，安全策略都能执行。
 
-#. To create an inbound rule, select the **+** icon that appears to the left of **AppTier:**\ *Initials*-**Web**.
+#. 要创建入站规则，请选择在 **+** 图标，它显示在 **AppTier:**\ *Initials*-**Web** 左侧.
 
    .. figure:: images/21.png
 
-#. Fill out the following fields:
+#. 填写以下字段:
 
    - **Protocol** - TCP
    - **Ports** - 80
 
    .. figure:: images/22.png
 
-   .. note::
+   .. 注意::
 
-     Multiple protocols and ports can be added to a single rule.
+     可以将多个协议和端口添加到单个规则中。
 
-#. Click **Save**.
+#. 点击 **Save**.
 
-   Calm could also require access to the VMs for workflows including scaling out, scaling in, or upgrades. Calm communicates with these VMs via SSH, using TCP port 22.
+   Calm可能还需要访问VM，以自动化地部署工作流，包括横向扩展，横向扩展或升级。Calm使用TCP端口22通过SSH与这些VM进行通信。
 
-#. Under **Inbound**, click **+ Add Source**.
+#. 在 **Inbound**, 点击 **+ Add Source**.
 
-#. Fill out the following fields:
+#. 填写以下字段:
 
-   - **Add source by:** - Select **Subnet/IP**
-   - Specify *Your Prism Central IP*\ /32
+   - **Add source by:** - 选择 **Subnet/IP**
+   - 指定 *你的 Prism Central IP*\ /32
 
-   .. note::
+   .. 注意::
 
-     The **/32** denotes a single IP as opposed to a subnet range.
+     **/32** 表示一个IP，而不是一个网段。
 
    .. figure:: images/23.png
 
-#. Click **Add**.
+#. 点击 **Add**.
 
-#. Select the **+** icon that appears to the left of **AppTier:**\ *Initials*-**Web**, specify **TCP** port **22** and click **Save**.
+#. 选择 **+** 图标，它出现在 **AppTier:**\ *Initials*-**Web** 左侧, 指定TCP **TCP** 端口 **22** 并点击 **Save**.
 
-#. Repeat Step 18 for **AppTier:**\ *Initials*-**DB** to allow Calm to communicate with the database VM.
+#. 对 **AppTier:**\ *Initials*-**DB** 重复步骤18，以使Calm与数据库VM通信。
 
    .. figure:: images/24.png
 
-   By default, the security policy allows the application to send all outbound traffic to any destination. The only outbound communication required for your application is to communicate with your DNS server.
+   默认情况下，安全策略允许应用程序将所有出站流量发送到任何目的地。应用程序所需的唯一出站通信是与DNS服务器的通信。
 
-#. Under **Outbound**, select **Whitelist Only** from the drop down menu, and click **+ Add Destination**.
+#. 在 **Outbound**, 从下拉菜单中选择 **Whitelist Only** ，然后点击 **+ Add Destination**.
 
-#. Fill out the following fields:
+#. 填写以下字段:
 
-   - **Add source by:** - Select **Subnet/IP**
-   - Specify *Your Domain Controller IP*\ /32
+   - **Add source by:** - 选择 **Subnet/IP**
+   - 指定 *你的域控制器 IP*\ /32
 
    .. figure:: images/25.png
 
-#. Click **Add**.
+#. 点击 **Add**.
 
-#. Select the **+** icon that appears to the right of **AppTier:**\ *Initials*-**Web**, specify **UDP** port **53** and click **Save** to allow DNS traffic. Repeat this for **AppTier:**\ *Initials*-**DB**.
+#. 选择 **+** 图标，它出现在 **AppTier:**\ *Initials*-**Web** 的右侧, 指定 **UDP** 端口 **53** 然后点击 **Save** 以允许DNS流量。 对 **AppTier:**\ *Initials*-**DB** 重复此步骤.
 
    .. figure:: images/26.png
 
-   Each tier of the application communicates with other tiers and the policy must allow this traffic. Some tiers such as web do not require communication within the same tier.
+   应用程序的每一层都可以与其他层进行通信，并且策略必须对该流量放行。
 
-#. To define intra-app communication, click **Set Rules within App**.
+#. 要定义应用间通信，请点击 **Set Rules within App**.
 
    .. figure:: images/27.png
 
-#. Click **AppTier:**\ *Initials*-**Web** and select **No** to prevent communication between VMs in this tier. There is only a single web VM within the tier.
+#. 点击 **AppTier:**\ *Initials*-**Web** 并选择 **No** 以防止该层中的VM之间进行通信。该层中只有一个Web VM。
 
-#. While **AppTier:**\ *Initials*-**Web** is still selected, click the :fa:`plus-circle` icon to the right of **AppTier:**\ *Initials*-**DB** to create a tier to tier rule.
+#. 在仍旧选择 **AppTier:**\ *Initials*-**Web** 的情况下，点击 :fa:`plus-circle` 图标，它出现在 **AppTier:**\ *Initials*-**DB** 右侧，以创建层级之间的规则。
 
-#. Fill out the following fields to allow communication on TCP port 3306 between the web and database tiers:
+#. 填写以下字段，以允许Web和数据库层之间在TCP端口3306上进行通信：
 
    - **Protocol** - TCP
    - **Ports** - 3306
 
    .. figure:: images/28.png
 
-#. Click **Save**.
+#. 点击 **Save**.
 
-#. Click **Next** to review the security policy.
+#. 点击 **Next** 查看安全策略。
 
-#. Click **Save and Monitor** to save the policy.
+#. 点击 **Save and Monitor** 以保存策略。
 
-Assigning Category Values
+分配类别值
 .........................
 
-You will now apply the previously created categories to the VMs provisioned from the Fiesta blueprint. Flow categories can be assigned as part of a Calm blueprint, but the purpose of this exercise is to understand category assignment to existing virtual machines.
+现在，您将先前创建的类别应用于从Fiesta蓝图配置的VM。Flow的类别可以作为Calm蓝图的一部分进行分配，但是本练习的目的是了解对现有虚拟机的类别分配。
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. 在 **Prism Central**, 选择 :fa:`bars` **> Virtual Infrastructure > VMs**.
 
-#. Click **Filters** and select the label for *Initials AHV Fiesta VMs* to display your virtual machines.
+#. 点击 **Filters** 然后选择 *Initials AHV Fiesta VMs* 的标签，以列出您的虚拟机。
 
    .. figure:: images/15.png
 
-#. Using the checkboxes, select the 2 VMs associated with the application (Web and DB) and select **Actions > Manage Categories**.
+#. 使用复选框，选择与该应用程序关联的2个VM（Web和DB），然后选择 **Actions > Manage Categories**.
 
    .. figure:: images/16.png
 
-#. Specify **AppType:**\ *Initials*-**Fiesta** in the search bar and click **Save** icon to bulk assign the category to all VMs.
+#. 在搜索栏中指定 **AppType:**\ *Initials*-**Fiesta** 然后点击 **Save** 图标将类别批量分配给所有VM。
 
    .. figure:: images/16a.png
 
-#. Select ONLY the *nodereact* VM, select **Actions > Manage Categories**, specify the **AppTier:**\ *Initials*-**Web** category and click **Save**.
+#. 选择 **Actions > Manage Categories**, 指定 **AppTier:**\ *Initials*-**Web** 类别，然后单击 **Save**.
 
    .. figure:: images/17.png
 
-#. Repeat Step 5 to assign **AppTier:**\ *Initials*-**DB** to your MySQL VM.
+#. 重复步骤 5 将 **AppTier:**\ *Initials*-**DB** 分配给MySQL VM。
 
-#. Finally, Repeat step 5 to assign **Environment:Dev** to your Windows Tools VM.
+#. 最后， 重复步骤 5 将 **Environment:Dev** 分配给Windows Tools VM。
 
-Monitoring and Applying a Security Policy
+监视并应用安全策略
 +++++++++++++++++++++++++++++++++++++++++
 
-Before applying the Flow policy, you will ensure the Fiesta application is working as expected.
+在应用Flow策略之前，您将确保Fiesta应用程序按预期运行。
 
-Testing the Application
+测试应用
 .......................
 
-#. From **Prism Central > Virtual Infrastructure > VMs**, note the IP address of your **-nodereact...** and **-MYSQL-...** VMs.
+#. 从 **Prism Central > Virtual Infrastructure > VMs**, 记录 **-nodereact...** 和 **-MYSQL-...** VM 的IP地址.
 
-#. Launch the console for your *Initials*\ **-WinToolsVM** VM.
+#. 启动你的 *Initials*\ **-WinToolsVM** VM控制台。
 
-#. From the *Initials*\ **-WinToolsVM** console open a browser and access \http://*node-VM-IP*/.
+#. 在 *Initials*\ **-WinToolsVM** 控制台中，打开浏览器并访问 \http://*node-VM-IP*/.
 
-#. Verify that the application loads and that tasks can be added and deleted.
+#. 验证应用程序已加载并且可以添加和删除任务。
 
    .. figure:: images/30.png
 
-#. Open **Command Prompt** and run ``ping -t MYSQL-VM-IP`` to verify connectivity between the client and database. Leave the ping running.
+#. 打开 **Command Prompt** 并运行 ``ping -t MYSQL-VM-IP`` 以验证客户端和数据库之间的连接。保持ping运行。
 
-#. Open a second **Command Prompt** and run ``ping -t node-VM-IP`` to verify connectivity between the client and web server. Leave the ping running.
+#. 打开第二个 **Command Prompt** 并运行 ``ping -t node-VM-IP`` 以验证客户端和Web服务器之间的连接。保持ping运行。
 
    .. figure:: images/31.png
 
-Using Flow Visualization
+使用Flow可视化
 ........................
 
-#. Return to **Prism Central** and select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies >**\ *Initials*-**Fiesta**.
+#. 返回到 **Prism Central** 并选择 :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies >**\ *Initials*-**Fiesta**.
 
-#. Verify that **Environment: Dev** appears as an inbound source. The source and line appear in yellow to indicate that traffic has been detected from your client VM.
+#. 验证 **Environment: Dev** 显示为入站源。源以黄色显示，表示已检测到来自客户端VM的流量。
 
    .. figure:: images/32.png
 
-   Are there any other detected outbound traffic flows? Hover over these connections and determine what ports are in use.
+   是否还有其他检测到的出站流量？将鼠标悬停在这些连接上，并确定正在使用的端口。
 
-#. Click **Update** to edit the policy.
+#. 点击 **Update** 以编辑策略。
 
    .. figure:: images/34.png
 
-#. Click **Next** and wait for the detected traffic flows to populate.
+#. 点击 **Next** 等待检测到的流量。
 
-#. Mouse over the **Environment: Dev** source that connects to **AppTier:**\ *Initials*-**Web** and click the :fa:`check` icon that appears.
+#. 将鼠标悬停在 **Environment: Dev** 的源上，它显示连接到了 **AppTier:**\ *Initials*-**Web** 然后单击出现的 :fa:`check` 图标。
 
    .. figure:: images/35.png
 
-#. Click **OK** to complete adding the rule.
+#. 点击 **OK** 完成添加规则。
 
-   The **Environment: Dev** source should now turn blue, indicating that it is part of the policy. Mouse over the flow line and verify that both ICMP (ping traffic) and TCP port 80 appear.
+   现在 **Environment: Dev** 源应变为蓝色，表明它是策略的一部分。将鼠标悬停在流线上，并验证是否同时显示了ICMP（ping通信）和TCP端口80。
 
-#. Click **Next > Save and Monitor** to update the policy.
+#. 点击 **Next > Save and Monitor** 以更新策略。
 
-Applying Flow Policies
+应用Flow策略
 ......................
 
-In order to enforce the policy you have defined, the policy must be applied.
+为了执行已定义的策略，必须应用该策略。
 
-#. Select *Initials*-**Fiesta**  and click **Actions > Apply**.
+#. 选择 *Initials*-**Fiesta**  然后点击 **Actions > Apply**.
 
    .. figure:: images/36.png
 
-#. Type **APPLY** in the confirmation dialogue and click **OK** to begin blocking traffic.
+#. 在确认对话框中点击 **APPLY** 然后单击 **OK** 开始阻止流量。
 
-#. Return to the *Initials*\ **-WinToolsVm** console.
+#. 返回 *Initials*\ **-WinToolsVm** 控制台.
 
-   What happens to the continuous ping traffic from the Windows client to the database server? Is this traffic blocked?
+   从Windows客户端到数据库服务器的持续ping通信会发生什么？该流量被阻止了吗？
 
-#. Verify that the Windows Client VM can still access the Fiesta application using the web browser and the web server IP address.
+#. 验证Windows客户端VM仍可以使用Web浏览器和Web服务器IP地址访问Fiesta应用程序。
 
-   Can you still add new products under **Products** and update product quantities under **Inventory**?
+   你仍然可以在添加新的 **Products** ，更新的产品数量的 **Inventory** 吗?
 
-Takeaways
+总结
 +++++++++
 
-- Microsegmentation offers additional protection against malicious threats that originate from within the data center and spread laterally, from one machine to another.
-- Categories created in Prism Central are available inside Calm blueprints.
-- Security policies leverage the text based categories in Prism Central.
-- Flow can restrict traffic on certain ports and protocols for VMs running on AHV.
-- The policy is created in **Monitor** mode, meaning traffic is not blocked until the policy is applied. This is helpful to learn the connections and ensure no traffic is blocked unintentionally.
+- 微分段技术可提供细颗粒度的保护，在数据中心内部，抵御从一台计算机横向传播到另一台计算机的恶意威胁。
+- 在Calm的蓝图中，也中可以找到在Prism Central中创建的类别。
+- 安全策略，利用的是Prism Central中基于文本的类别。
+- Flow可以限制AHV上运行的VM的某些端口和协议上的流量。
+- 该策略以 **Monitor** 模式创建，这意味着在应用该策略之前不会阻止流量。这有助于了解通信是否正常，并确保不会影响并误伤其他流量。

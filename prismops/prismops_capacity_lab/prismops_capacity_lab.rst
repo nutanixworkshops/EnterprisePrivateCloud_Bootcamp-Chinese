@@ -1,163 +1,162 @@
-------------------------
-Prism Ops Capacity Runway
-------------------------
+--------------------------
+Prism Pro 资源倒计时
+--------------------------
 
 .. figure:: images/operationstriangle.png
 
-Prism Ops brings smart automation to our customer’s daily IT operations. The typical operations workflow is a continuous cycle of monitoring, analyzing and taking action where necessary. Prism Ops mirrors traditional IT Admin's workflows to improve operations efficiency. With Prism Ops, IT Admins are able to connect insights from machine data to automate this typical flow using the power of the machine learning engine X-FIT and the X-Play automation engine.
+Prism Pro为我们的客户的日常IT操作带来了智能自动化。典型的操作工作流是一个监视、分析和采取必要行动的连续循环。 Prism Pro反映了传统IT Admin的工作流程，以提高运营效率。 借助Prism Pro，IT管理员可以使用机器学习引擎X-FIT和X-Play自动化引擎的强大功能，将机器数据中的洞察力连接起来，来自动化该典型流程。
 
-In this lab you will learn how Prism Ops can help IT Admins monitor, analyze and automatically act when cluster runway is low.
+在本实验室中，您将了解Prism Pro如何帮助IT管理员在集群runway不足时进行监视、分析和自动操作的。
 
-Lab Setup
+实验设置
 +++++++++
 
-#. Open your **Prism Central** and navigate to the **VMs** page. Note down the IP Address of the **GTSPrismOpsLabUtilityServer**. You will need to access this IP Address throughout this lab.
+#. 打开您的 **Prism Central** 并导航至 **VMs** 页面。 记下 **GTSPrismOpsLabUtilityServer** 的IP地址。 在整个实验过程中，您将需要访问此IP地址。
 
    .. figure:: images/init1.png
 
-#. Open a new tab in the browser, and navigate to http://`<GTSPrismOpsLabUtilityServer_IP_ADDRESS>`/alerts [example http://10.42.113.52/alerts]. It is possible you may need to log into the VM if you are the first one to use it. Just fill out the **Prism Central IP**, **Username** and **Password** and click **Login**.
+#. 在浏览器中打开一个新标签，然后浏览至 http://`<GTSPrismOpsLabUtilityServer_IP_ADDRESS>`/alerts [example http://10.42.113.52/alerts]. 如果您是第一个使用该虚拟机的人，则可能需要登录该虚拟机。 只需填写 **Prism CentralIP** ，**Username** 和 **Password**，然后单击 **Login**。
 
    .. figure:: images/init2.png
 
-#. Once you have landed on the alerts page, leave the tab open. It will be used in a later portion of this lab.
+#. 一旦你登陆到提醒页面，请保持打开选项卡。 它将在本实验的后续部分中使用。
 
    .. figure:: images/init2b.png
 
-#. In a separate tab, navigate to http://`<GTSPrismOpsLabUtilityServer_IP_ADDRESS>`/ to complete the lab from [example http://10.42.113.52/]. Use the UI at this URL to complete the lab.
+#. 在另一个选项卡中，导航至http：//`<GTSPrismOpsLabUtilityServer_IP_ADDRESS>`/，从[示例http://10.42.113.52/]完成实验。 使用此URL上的UI可以完成实验。
 
    .. figure:: images/init3.png
 
-Capacity Planning Runway Monitoring
+容量规划资源倒计时监控
 ++++++++++++++++++++++++++++++++++++++
 
-Capacity runway is a measure of the remaining capacity left within a given cluster or node. There is an overall cluster runway as well as individual runway measurements for CPU, Memory and storage capacity. The Capacity Runway is calculated using X-FIT, Prism Ops's machine intelligence engine. Lets view the Capacity Runway of your lab cluster.
+资源倒计时是对给定群集或节点内剩余容量的度量。 有一个总体集群资源倒计时，以及针对CPU，内存和存储容量的单独资源倒计时。 资源倒计时是使用Prism Pro的机器智能引擎X-FIT计算的。 让我们查看您的实验中集群的资源倒计时。
 
-#. In **Prism Central > Operations > Planning > Capacity Runway**.
+#. 在 **Prism Central > Operations > Planning > Capacity Runway** 中。
 
-   - Note the runway summaries showing the days left for each cluster.
-   - How long does the current cluster has before it runs out of memory, CPU, and storage?
+   - 注意资源倒计时摘要显示每个群集剩余的天数。
+   - 当前集群在耗尽内存、CPU和存储之前有多长时间?
 
-#. Click on the **Prism-Pro-Cluster** cluster.
+#. 单击 **Prism-Pro-Cluster** 集群。
 
-. You can now take a look at the Runway for Storage, CPU, and Memory.
+. 现在您可以查看资源倒计时上的存储、CPU和内存。
 
    .. figure:: images/ppro_12.png
 
-#. When selecting the Memory tab, you can see a Red Exclamation mark, indicating where this cluster will run out of Memory. You can hover the chart at this point to see on which day this will occur.
+#. 在选择Memory选项卡时，您会看到一个红色的感叹号，表示这个集群将在什么地方耗尽内存。您可以将图表悬停在此处，以查看这将发生在哪一天。
 
    .. figure:: images/ppro_13.png
 
-#. Click on the **‘Optimize Resources’** button on left. This is where you can see the inefficient VMs in the environment with suggestions on how you can optimize these resources to be as efficient as possible.
+#. 点击左侧的 **‘Optimize Resources’** 按钮。在这里，您可以看到环境中的低效虚拟机，以及如何优化这些资源以尽可能提高效率的建议。
 
    .. figure:: images/ppro_14.png
 
-#. Close the optimize resources popup.
+#. 关闭优化资源弹出窗口。
 
-Capacity Planning Runway Analysis
+容量规划资源倒计时分析
 ++++++++++++++++++++++++++++++++++++++
 
-Prism Ops's X-FIT engine also provides the capability to plan for future workloads and identifies the hardware that can be added to account for the new workloads resource requirements.
+Prism Pro的X-FIT引擎还提供了规划未来工作负载的能力，并确定了可以添加的硬件，以满足新的工作负载资源需求。
 
-#. Under the **‘Adjust Resources’** section in the left side of this page, click the **‘Get Started’** button. We can now use this to start planning for new workloads and see how runway will need to be extended in the future.
+#. 在本页左侧的 **‘Adjust Resources’** 部分，单击 **‘Get Started’** 按钮。我们现在可以用它来开始规划新的工作负载，查看未来资源倒计时需要如何扩展。
 
-#. Click the **add/adjust** button in the left side underneath the ‘Workloads’ item.
+#. 点击“Workloads”项下方左侧的“add/adjust”按钮。
 
    .. figure:: images/ppro_15.png
 
-#. Add one for VDI and select 1000 Users. You can also set a date for when this workload should be added to the system. Save this workload when you are done.
+#. 添加一个VDI工作负载，并选择1000个用户。您还可以设置将此工作负载添加到系统的日期。完成后保存此工作负载。
 
    .. figure:: images/ppro_16.png
 
    .. figure:: images/ppro_17.png
 
-#. Add another workload of your choice.
+#. 添加您选择的另一个工作负载。
 
-#. Now click the **‘Recommend’** button on the right side of the page.
+#. 现在，点击页面右侧的 **‘Recommend’** 按钮。
 
    .. figure:: images/ppro_18.png
 
-#. Once the Recommendation is available, toggle between list and chart view to get a better overview of your Scenario.
+#. 一旦“Recommend”可用，便可以在列表视图和图表视图之间切换，以更好地了解您的方案。
 
    .. figure:: images/ppro_19.png
 
-#. Click the **Generate PDF** button in the upper right hand corner. This will open a new tab with a PDF report for the scenario/workloads you have created.
+#. 点击右上角的 **Generate PDF** 按钮。这将为您创建的scenario/workloads打开一个带有PDF报告的新选项卡。
 
    .. figure:: images/ppro_19b.png
 
-#. View your report.
+#. 查看你的报告。
 
    .. figure:: images/ppro_20.png
 
-Automate Capacity Forecast Report Generation with X-Play
+使用X-Play自动生成容量预测报告
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Now let's look at how we can take automated action to generate this report when the Capacity Runway is low. We will use X-Play, Prism Ops's simple automation engine.
+现在让我们看看如何在资源不足的时候自动生成报告。我们将使用Prism Pro的简单自动化引擎X-Play。
 
-#. Use the search bar to navigate to the **Playbooks** page.
+#. 使用搜索栏导航到 **Playbooks** 页面。
 
    .. figure:: images/cap1.png
 
-#. Click **Create Playbook** at the top of the table view.
+#. 点击表格视图顶部的 **Create Playbook** 。
 
    .. figure:: images/cap2.png
 
-#. Select the **Alert** as the trigger.
+#. 选择 **Alert** 作为触发器。
 
    .. figure:: images/cap3.png
 
-#. Search and select **Cluster running out of Memory Capacity (low runway)** as the alert policy, since this is the issue we are looking to take automated steps to generate a report for.
+#. 搜索并选择 **Cluster running out of Memory Capacity (low runway)** 作为警报策略，因为这是我们正在寻求采取自动化步骤来生成报告的问题。
 
    .. figure:: images/cap4.png
 
-#. First, we would like to Generate a Forecast report for this alert. Click **Add Action** on the left side and select the **Generate Forecast Report** action.
+#.  首先，我们要为此警报生成一个预测报告。 点击左侧的 **Add Action**，然后选择 **Generate Forecast Report** 操作。
 
    .. figure:: images/cap5.png
 
-#. The Alert Source Entity in this case will be the Cluster that the alert is generated on. You can also change the Runway Period if you would like.
+#. 在这种情况下，警报源实体将是生成警报的群集。 您也可以根据需要更改Runway Period。
 
    .. figure:: images/cap6.png
 
-#. Next we would like to notify someone that the ticket was created by X-Play. Click **Add Action** and select the **Email** action.
+#. 接下来，我们想通知某人该工单是由X-Play创建的。 单击 **Add Action** ，然后选择 **Email** 操作。
 
    .. figure:: images/cap7.png
 
-#. Fill in the field in the email action. Here are the examples
+#. 填写电子邮件操作中的字段。下面是一些例子：
 
-   - **Recipient:** - Fill in your email address.
-   - **Subject :** - ``Playbook {{playbook.playbook_name}} was executed.``
-   - **Message:** - `As a result of the alert, {{trigger[0].alert_entity_info.name}}, the playbook, {{playbook.playbook_name}}, was executed. The generated report is attached to this email.``
+   - **Recipient:** - 填写你的邮件地址。
+   - **Subject :** - ``Playbook {{playbook.playbook_name}} 已执行。``
+   - **Message:** - `作为警报的结果， {{trigger[0].alert_entity_info.name}}, Playbook, {{playbook.playbook_name}}, 已执行。 生成的报告将附加到此电子邮件中。``
 
    .. note::
 
-      You are welcome to compose your own subject message. The above is just an example. You could use the “parameters” to enrich the message.
+      欢迎您撰写您自己的主题信息。 以上仅是示例。 您可以使用“parameters”来丰富消息。
 
    .. figure:: images/cap8.png
 
-#. Click **Save & Close** button and save it with a name “*Initials* - Automatically Generate Forecast Report”. **Be sure to enable the ‘Enabled’ toggle.**
+#. 单击“Save & Close”按钮，并将其保存为名称 “*姓名缩写* - Automatically Generate Forecast Report”。 **请确保启用“Enabled”状态。**
 
    .. figure:: images/cap9.png
 
-#. The alert simulation portion of this lab is not working today, instead we will show you what it would look like if the alert were to successfully generate. From the table view click to open the details for the “*Initials* - Automatically Generate Forecast Report” Playbook.
-
+#. 该实验的警报模拟部分今天无法正常触发，因此，我们将向您展示如果成功生成警报，它将是什么样。 在表格视图中，单击以打开 “*姓名缩写* - Automatically Generate Forecast Report” Playbook的详细信息
    .. figure:: images/cap11.png
 
-#. Switch to the **Plays** tab. If an alert were to generate for this playbook you would see a play like this in this tab.
+#. 切换到 **Plays** 标签。 如果要为该Playbook生成警报，您将在此选项卡中看到类似的Playbook。
 
    .. figure:: images/cap12.png
 
-#. Clicking on it would show this view. The sections in this view can be expanded to show more details for each item. If there were any errors, they would also be surfaced in this view.
+#. 单击它将显示此视图。可以展开此视图中的节，以显示每个项的更多详细信息。如果有任何错误，它们也会出现在这个视图中。
 
    .. figure:: images/cap13.png
 
-#. You would also get an email that looks something like this.
+#. 你也会收到这样的邮件。
 
    .. figure:: images/cap14.png
 
-Takeaways
+重点回顾
 .........
 
-- Prism Ops is our solution to make IT OPS smarter and automated. It covers the IT OPS process ranging from intelligent detection to automated remediation.
+- Prism Ops是我们使IT OPS更加智能和自动化的解决方案。 它涵盖从智能检测到自动修复的IT OPS流程。
 
-- X-FIT is our machine learning engine to support smart IT OPS, including capacity forecasting.
+- X-FIT 是我们的机器学习引擎，可支持智能IT OPS，包括容量预测。
 
-- X-Play, the IFTTT for the enterprise, is our engine to enable the automation of daily operations tasks, making it so easy that automation can be built by every admin.
+- X-Play, 是企业的IFTTT，是我们实现日常操作任务自动化的引擎，它使每个管理员都可以轻松实现自动化。
