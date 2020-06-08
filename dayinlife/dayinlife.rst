@@ -49,7 +49,7 @@
 
 #. 单击 **Save** 以创建存储并将其安装到群集中的所有可用主机上。在vSphere或Hyper-V环境中，创建存储容器还将自动将存储安装到虚拟机管理程序。
 
-#. 选择一个现有的存储容器，然后查看通过不同数据减少/避免功能以及 **Effective Capacity**（这是基于整体效率对可用存储的预测）得出的单个节省。 这些值可在 **Storage Container Details** 表中找到。
+#. 选择一个现有的存储容器，然后查看通过不同数据减少/避免功能以及 **Effective Capacity** （这是基于整体效率对可用存储的预测）得出的单个节省。 这些值可在 **Storage Container Details** 表中找到。
 
 
 设置新网络
@@ -65,7 +65,7 @@ AHV将Open vSwitch（OVS）用于所有VM网络。 OVS是在Linux内核中实现
 
    .. figure:: images/9.png
 
-#. 点击 **+ Create Network** 并使用 :ref:`clusterassignments`中的 **User** 特定网络详细信息填写以下字段：
+#. 点击 **+ Create Network** 并使用 :ref:`clusterassignments` 中的 **User** 特定网络详细信息填写以下字段：
 
    - **Name** - *Initials*-Network_IPAM
    - **VLAN ID** - A value (< 4096) other than your **Primary** or **Secondary** network VLANs
@@ -78,7 +78,9 @@ AHV将Open vSwitch（OVS）用于所有VM网络。 OVS是在Linux内核中实现
    - **End Address** - 10.0.0.150
    - 点击 **Submit**
 
+
    .. figure:: images/network_config_03.png
+
 
     请注意，AHV能够提供集成的DHCP服务（IPAM），允许虚拟化管理员从配置的池中为虚拟机分配IP，或者在向虚拟机添加虚拟NIC时轻松地将IP指定为DHCP保留。
 
@@ -146,13 +148,13 @@ AHV将Open vSwitch（OVS）用于所有VM网络。 OVS是在Linux内核中实现
 启动用户自助服务
 ++++++++++++++++++++++++++
 
-虽然Prism和```acli``提供了用于创建VM的简单工作流，但Carol经常被这些请求所淹没，并且希望将自己的更多时间用于现代化组织老化的基础架构的其他部分以及参加儿子的足球比赛。
+虽然Prism和 ``acli`` 提供了用于创建VM的简单工作流，但Carol经常被这些请求所淹没，并且希望将自己的更多时间用于现代化组织老化的基础架构的其他部分以及参加儿子的足球比赛。
 
 在以下练习中，Carol将使用自己的私有云，并利用Prism Central中的本机功能为用户提供IaaS自助服务。
 
-＃ 返回 **Prism Element** 的 **Home** 页面。
+＃. 返回 **Prism Element** 的 **Home** 页面。
 
-＃ 通过单击 **Launch** 按钮并使用以下凭据登录来访问 **Prism Central** ：
+＃. 通过单击 **Launch** 按钮并使用以下凭据登录来访问 **Prism Central** ：
 
 
    - **User Name** - admin
@@ -169,7 +171,7 @@ AHV将Open vSwitch（OVS）用于所有VM网络。 OVS是在Linux内核中实现
 
 在本练习中，您将为Carol创建一个自定义类别，以帮助调整对Fiesta应用程序团队适当资源的访问。
 
-#. 在 **Prism Central**界面, 选择 :fa:`bars` **> Virtual Infrastructure > Categories**.
+#. 在 **Prism Central** 界面, 选择 :fa:`bars` **> Virtual Infrastructure > Categories**.
 
    .. figure:: images/14.png
 
@@ -222,9 +224,9 @@ Carol需要支持在Fiesta团队中工作的两种类型的用户：需要为测
 
    .. figure:: images/19.png
 
-#. 在 **Users and Groups**下，指定从NTNXLAB.local域自动发现的 **SSP Developers** 用户组。
+#. 在 **Users and Groups** 下，指定从NTNXLAB.local域自动发现的 **SSP Developers** 用户组。
 
-#. 在 **Entities**下, 使用下拉菜单指定以下资源：
+#. 在 **Entities** 下, 使用下拉菜单指定以下资源：
 
    - **AHV Cluster** - *Your Assigned Cluster*
    - **AHV Subnet** - Secondary
@@ -237,7 +239,7 @@ Carol需要支持在Fiesta团队中工作的两种类型的用户：需要为测
     默认的Operator角色具有删除VM和从“蓝图”部署的应用程序的权限，在我们的环境中是不希望赋予这个权限的。 无需从头开始构建新角色，我们可以克隆到现有角色并进行修改以适应我们的需求。 所需的操作员角色应能够查看VM指标，执行电源操作并更新VM配置（例如vCPU或内存）以解决应用程序性能问题。
 
 
-#. 单击内置的**Operator** 角色，然后单击 **Duplicate**.
+#. 单击内置的 **Operator** 角色，然后单击 **Duplicate**.
 
 #. 填写以下字段，然后单击 **Save** 以创建您的自定义角色:
 
@@ -267,7 +269,7 @@ Carol需要支持在Fiesta团队中工作的两种类型的用户：需要为测
 
    .. figure:: images/22.png
 
-   点击**Save**.
+   点击 **Save** .
 
 #. 对于Carol等基础架构管理员，您可以将AD用户映射到 **Prism Admin** 或 **Super Admin** 角色，通过选择 :fa:`bars` **> Prism Central Settings > Role Mapping** 并添加新的 **Cluster Admin** 或 **User Admin** 映射到 AD 用户。
 
@@ -296,13 +298,13 @@ Nutanix Calm允许您跨私有（AHV，ESXi）和公共云（AWS，Azure，GCP�
 
    - **Project Name** - *Initials*\ -FiestaProject
 
-   - 在 **Infrastructure**下, 选择 **Select Provider > Nutanix**
+   - 在 **Infrastructure** 下, 选择 **Select Provider > Nutanix**
 
    - 点击 **Select Clusters & Subnets**
 
    - 选择 *Your Assigned Cluster*
 
-   - 在 **Subnets**下, 选择 **Primary**, **Secondary**, 并点击 **Confirm**
+   - 在 **Subnets** 下, 选择 **Primary**, **Secondary**, 并点击 **Confirm**
 
    - 点击 :fa:`star` 标记 *Primary* 作为默认的网络。
 
@@ -318,7 +320,7 @@ Nutanix Calm允许您跨私有（AHV，ESXi）和公共云（AWS，Azure，GCP�
       - **Role** - *Initials*\ -SmoothOperator
       - **Action** - Save
 
-   - 在 **Quotas**下, 详述
+   - 在 **Quotas** 下, 详述
 
       - **vCPUs** - 100
       - **Storage** - <Leave Blank>
@@ -411,7 +413,7 @@ Dan是Fiesta工程团队的成员。 他落后于测试一项新功能，因为�
 
 Dan诉诸于在他最喜欢的公共云服务上将公司VM之外的VM部署在不受安全监督的情况下，并使公司IP处于危险之中。
 
-卡洛（Carol）鼓励丹（Dan）进行以下练习，以使他能够通过Prism在Fiesta项目中轻松部署资源。
+Carol鼓励丹Dan进行以下练习，以使他能够通过Prism在Fiesta项目中轻松部署资源。
 
 #. 登出本地 **admin** 账号并用Dan的账号登录 **Prism Central** :
 
@@ -467,15 +469,15 @@ Dan诉诸于在他最喜欢的公共云服务上将公司VM之外的VM部署在�
 
          .. figure:: images/32.png
 
-      - 在 **Application Profile**下面, 选择 **AHV** 并观察蓝图中定义的变量。Variables 变量允许运行时自定义，也可以在每个应用程序配置文件的基础上使用变量来构建单个应用程序蓝图，该蓝图可让您将应用程序配置到多个环境，包括AHV，ESXi，AWS，GCP和Azure。 
+      - 在 **Application Profile** 下面, 选择 **AHV** 并观察蓝图中定义的变量。Variables 变量允许运行时自定义，也可以在每个应用程序配置文件的基础上使用变量来构建单个应用程序蓝图，该蓝图可让您将应用程序配置到多个环境，包括AHV，ESXi，AWS，GCP和Azure。 
 
          .. figure:: images/33.png
 
-      - 在 **Application Profile** 下面选择**Create** 查看服务之间的依赖关系。 依赖关系可以显式定义，但是根据变量的分配，Calm还将标识隐式依赖关系。在此蓝图中，您将看到直到MySQL数据库运行，Web层安装过程才会开始。
+      - 在 **Application Profile** 下面选择 **Create** 查看服务之间的依赖关系。 依赖关系可以显式定义，但是根据变量的分配，Calm还将标识隐式依赖关系。在此蓝图中，您将看到直到MySQL数据库运行，Web层安装过程才会开始。
 
          .. figure:: images/34.png
 
-      - 选择 **Credentials** in the toolbar at the top of the Blueprint Editor and expand the existing **CENTOS** credential. Blueprints can contain multiple credentials which can be used to authenticate to VMs to execute scripts, or securely pass credentials directly into scripts.
+      - 在Blueprint Editor上方的工具栏选择 **Credentials** 并展开现有的 **CENTOS** 凭证设置。 蓝图可以包含多个凭证，这些凭证可用于向VM进行身份验证以执行脚本，或将凭证直接安全地传递到脚本中。
 
          .. figure:: images/35.png
 
@@ -485,100 +487,106 @@ Dan诉诸于在他最喜欢的公共云服务上将公司VM之外的VM部署在�
 
    .. figure:: images/36.png
 
-#. Fill out the following fields and click **Create**:
+#. 填写以下字段，然后单击 **Create**:
 
    - **Name of of the Application** - *Initials* -FiestaMySQL
    - **db_password** - nutanix/4u
 
    .. figure:: images/37.png
 
-#. Select the **Audit** tab to monitor the deployment of the Fiesta development environment. Complete provisioning of the app should take approximately 5 minutes.
+#. 选择 **Audit** 选项卡以监视Fiesta开发环境的部署。 完整配置该应用程序大约需要5分钟。
 
    .. figure:: images/38.png
 
-#. While the application is provisioning, open :fa:`bars` **> Administration > Projects** and select your project.
+#. 当应用正在制备，打开 :fa:`bars` **> Administration > Projects** 并选择您的project。
 
-#. Review the **Summary**, **Usage**, **VMs**, and **Users** tabs to see what type of data is made available to users. These breakouts make it easy to understand on a per project, vm, or user level, what resources are being consumed.
+#. 观察 **Summary**, **Usage**, **VMs**, 和 **Users** 页面找到用户可以看见什么类型的数据。 通过这些数据，可以轻松地了解在每个项目，虚拟机或用户级别上了解正在消耗哪些资源。
 
    .. figure:: images/39.png
 
-#. Return to **Calm > Applications >** *Initials*\ **-FiestaMySQL** and wait for the application to move from **Provisioning** to **Running**. Select the **Services** tab and select the **NodeReact** Service to obtain the IP of the web tier.
+#. 返回 **Calm > Applications >** *Initials*\ **-FiestaMySQL** 等待应用的状态从 **Provisioning** 变为 **Running**. 选择 **Services** 页面并选择 **NodeReact** 服务以获得web层的 IP。
 
    .. figure:: images/40.png
 
-#. Open \http://<*NodeReact-VM-IP*> in a new browser tab and validate the app is running.
+#. 在新的浏览器页面打开 \http://<*NodeReact-VM-IP*> 确认 app正在运行。
 
    .. figure:: images/41.png
 
-   Instead of filing tickets and waiting days, Dan was able to get his test environment up and running before lunch. Instead of drowning his sorrows in Ben & Jerry's tonight, Dan is going to go to the gym, and eat vegetables with his dinner. Go, Dan!
+   Dan无需提交票证和等待几天，而是能够在午餐前启动并运行测试环境。 Dan不是去今晚在本·杰里（Ben＆Jerry）的面前添堵，而是去健身房，在晚餐时吃蔬菜。 出发吧，Dan！
 
-Operator Workflows
+运维人员工作流程
 ++++++++++++++++++
 
-Meet Ronald and Elise. Ronald works as a Level 3 engineering with the corporate IT helpdesk, and Elise works as a QA intern on the Fiesta team. In the brief exercise below you will explore and contrast their levels of access based on the roles defined and categories assigned by Carol.
+罗纳德（Ronald）是公司IT服务台的3级工程人员，艾莉丝（Elise）是Fiesta团队的质量保证实习生。 在下面的简短练习中，您将根据Carol定义的角色和分配的类别来探索和比较它们的访问级别。
 
-#. Log out of the **devuser01** account and log back into **Prism Central** with Ronald's credentials:
+#. 登出 **devuser01** 用户并通过Ronald的凭证登录 **Prism Central**:
 
    - **User Name** - operator01@ntnxlab.local
    - **Password** - nutanix/4u
 
-#. As expected, all VMs with **Environment** category values assigned are available. Note that you have no ability to **Create** or **Delete** VMs, but the abilities to power manage and change VM configurations are present.
+#. 如预期的那样，所有分配了 **Environment** 类别值的虚拟机都可用。 请注意，您没有能力 **Create** 或 **Delete** VM，但是具有电源管理和更改VM配置的功能。
 
-   What else can be accessed by this user? Is Calm available?
+    该用户还可以访问什么？ 可以用Calm吗？
 
    .. figure:: images/42.png
 
-#. Log out of the **operator01** account and log back into **Prism Central** with Elise's credentials:
+#. 登出 **operator01** 用户并用Elise's的凭证重新登录到**Prism Central**:
 
    - **User Name** - operator02@ntnxlab.local
    - **Password** - nutanix/4u
 
-#. Note that only resources tagged with the *Initials*\ **-Team: Fiesta** category are available to be managed.
-
+#. 请注意，只有标有 *Initials*\ **-Team: Fiesta** 类别的资源才可供管理。
    .. figure:: images/43.png
 
-#. Elise receives an alert that memory utilization is high on the **nodereact** VM. Update the configuration to increase memory and power cycle the VM.
+#. Elise 收到有关 **nodereact** VM上内存利用率高的警报。 更新配置以增加内存并重启虚拟机。
 
-Using Entity Browser, Search, and Analysis
+使用实体浏览器、搜索和分析
 ++++++++++++++++++++++++++++++++++++++++++
 
-Now that Carol has freed up time to focus on replacing additional legacy infrastructure, it is important for her to understand how a large, diverse environment can all be managed and monitored via Prism Central. In the exercise below you will explore common workflows for working with entities across multiple clusters in a Nutanix environment.
+既然Carol已经腾出时间专注于替换其他旧有基础架构，那么对她来说，了解如何通过Prism Central如何管理和监视大型，多样化的环境就变得很重要。 在下面的练习中，您将探索用于在Nutanix环境中跨多个群集的实体的通用工作流程。
 
-#. Log out of the **operator02** account and log back into **Prism Central** with Carol's AD credentials:
+#. 登出 **operator02** 账户并通过Carol's的AD凭证重新登回 **Prism Central**:
 
    - **User Name** - adminuser01@ntnxlab.local
    - **Password** - nutanix/4u
 
-#. Open :fa:`bars` **> Virtual Infrastructure > VMs**. Prism Central's **Entity Browser** provides a robust UI for sorting, searching, and viewing entities such as VMs, Images, Clusters, Hosts, Alerts, and more!
+#. 打开 :fa:`bars` **> Virtual Infrastructure > VMs**. Prism Central的 **Entity Browser** 提供了一个强大的UI，用于对VM，图像，群集，主机，警报等实体进行排序，搜索和查看！
 
-#. Select **Filters** and explore the available options. Specify the following example filters, and verify the corresponding box is checked:
+#. 选择 **Filters** 并探索和获得的选项. 指定以下示例过滤器，并验证是否选中了相应的框：
 
    - **Name** - Contains *Initials*
    - **Categories** - *Initials*\ -Team: Fiesta
    - **Hypervisor** - AHV
    - **Power State** - On
 
-   Take notice of other helpful filters available such as VM efficiency, memory usage, and storage latency.
 
-#. Select all of the filtered VMs and click the **Label** icon to apply a custom label to your group of filtered VMs (e.g. *Initials* AHV Fiesta VMs).
+
+
+＃选择 **Focus** 下拉列表以访问不同的开箱即用视图。应该使用哪个视图来了解您的VM是否包含在灾难恢复计划中？
+
+＃单击 **Focus > + Add Custom** CPU使用率**， **CPU Usage**, **CPU Ready Time**, **IO Latency**, **Working Set Size Read**, and **Working Set Size Write**.。这样的视图可以用来帮助发现VM性能问题。
+
+＃要充分了解Prism Central在搜索，排序和分析实体方面的功能，请观看以下简短视频：
+
+
+
+   请注意其他可用的有用过滤器，例如VM效率，内存使用率和存储延迟。
+
+#. 选择所有已过滤的VM，然后单击 **Label** 图标，将自定义标签应用于已过滤的VM组（例如* Initials * AHV Fiesta VM）。
 
    .. figure:: images/44.png
 
-#. Clear all filters and select your new label to quickly return to your previously identified VMs. Labels provide an additional means of taxonomy for entities, without tying them to specific policies as is with categories.
+#. 清除所有过滤器并选择新标签，以快速返回到先前标识的VM。标签为实体提供了另一种分类方法，而无需像类别那样将它们绑定到特定策略。
 
    .. figure:: images/45.png
 
-#. Select the **Focus** dropdown to access different out of box views. Which view should be used to understand if your VMs are included as part of a DR plan?
+#. 选择 **Focus** 下拉列表以访问不同的开箱即用视图。应该使用哪个视图来了解您的VM是否包含在灾难恢复计划中？
 
-#. Click **Focus > + Add Custom** to create a VM view (e.g. *XYZ-VM-View*) that displays **CPU Usage**, **CPU Ready Time**, **IO Latency**, **Working Set Size Read**, and **Working Set Size Write**. Such a view could be used to helping to spot VM performance problems.
+#. 点击 **Focus > + Add Custom** 创建一个VM 视图 (e.g. *XYZ-VM-View*) 显示VM相关的 **CPU Usage**, **CPU Ready Time**, **IO Latency**, **Working Set Size Read**, 和 **Working Set Size Write**. 这样的视图可以用来帮助发现VM性能问题。
 
    .. figure:: images/46.png
 
-#. To fully appreciate the power of Prism Central for searching, sorting, and analyzing entities, view the following brief video:
 
-   .. raw:: html
-
-     <center><iframe width="640" height="360" src="https://www.youtube.com/embed/HXWCExTlXm4?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
 
 提升生命周期管理（LCM）
 ++++++++++++++++++++++++++++++
