@@ -40,7 +40,7 @@
 
 欢迎来到Nutanix企业私有云新手训练营！ 该工作手册随附了一个由讲师指导的课程，其中介绍了Nutanix Core技术和许多常见的管理任务。
 
-您将探索Prism Central，并熟悉其功能和导航。 您将使用Prism执行基本的群集管理任务，包括存储和联网。 您还将通过Prism和AHV逐步完成基本的VM部署和管理任务。 最后，您将探索VM数据保护，包括快照和复制。 讲师解释练习并回答您可能有的其他问题。
+您将探索Prism Central，并熟悉其功能和导航。 您将使用Prism执行基本的群集管理任务，包括存储和网络。 您还将通过Prism和AHV逐步完成基本的VM部署和管理任务。 最后，您将探索VM数据保护，包括快照和复制。 讲师解释练习并回答您可能有的其他问题。
 
 在训练营结束时，与会人员应了解构成Nutanix企业云堆栈的核心概念和技术，并应为托管或现场概念验证（POC）参与做好充分的准备。
 
@@ -56,25 +56,18 @@
 日程
 ++++++
 
-- Introductions
-- Nutanix Presentation
-- A Day in the Life
+- 简介
+- Nutanix 宣讲
+- 日常的一天
 - Prism Ops
-- Platform Security
 - Files
 - Flow
 
-Introductions
+初始化设置
 +++++++++++++
 
-- Name
-- Familiarity with Nutanix
-
-Initial Setup
-+++++++++++++
-
-- Take note of the *Passwords* being used.
-- Log into your virtual desktops (connection info below)
+- 记下使用的密码 *Passwords* 
+- 登录连接到实验环境
 
 环境细节信息
 +++++++++++++++++++

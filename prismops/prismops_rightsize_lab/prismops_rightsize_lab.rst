@@ -1,5 +1,5 @@
 -------------------------------
-使用Prism Ops调整虚拟机的大小
+使用Prism Ops调整VM大小
 -------------------------------
 
 .. figure:: images/operationstriangle.png
