@@ -593,21 +593,6 @@ Carol鼓励丹Dan进行以下练习，以使他能够通过Prism在Fiesta项目�
 
 尽管不是日常活动，但Carol以前将多达40％的时间用于规划和执行遗留基础架构的软件和固件更新，因此很少有时间进行创新。 在她的Nutanix环境中，Carol利用Lifecycle Manager（LCM）中的规则引擎和丰富的自动化功能，摆脱了计划和应用基础架构软件更新的麻烦。
 
-虽然在共享集群环境中，您无法直接测试LCM。 要更熟悉LCM的功能和易用性，请单击下面提供的每个交互式演示。
-
-5.11 Prism Element LCM Interactive Demo
-=======================================
-
-.. figure:: https://demo-captures.s3-us-west-1.amazonaws.com/pe-5.11-lcm/story_content/thumbnail.jpg
-   :target: https://demo-captures.s3-us-west-1.amazonaws.com/pe-5.11-lcm/story.html
-   :alt: Prism Element 5.11 LCM Interactive Demo
-
-5.11 Prism Central LCM Interactive Demo
-=======================================
-
-.. figure:: https://demo-captures.s3-us-west-1.amazonaws.com/pc-5.11-lcm/story_content/thumbnail.jpg
-   :target: https://demo-captures.s3-us-west-1.amazonaws.com/pc-5.11-lcm/story.html
-   :alt: Prism Central 5.11 LCM Interactive Demo
 
 下一步
 ++++++++++
