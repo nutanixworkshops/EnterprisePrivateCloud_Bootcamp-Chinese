@@ -1,26 +1,26 @@
 .. _linux_tools_vm:
 
 ---------------
-Linux Tools VM
+Linux工具VM
 ---------------
 
-Overview
+简介
 +++++++++
 
-This CentOS VM image will be staged with packages used to support multiple lab exercises.
+此CentOS VM映像将与用于支持多个实验室练习的软件包一起暂存。
 
-Deploy this VM on your assigned cluster if directed to do so as part of **Lab Setup**.
+如果指示这样做，请在 **Lab Setup** 中将此虚拟机部署到您分配的群集上。
 
 .. raw:: html
 
   <strong><font color="red">Only deploy the VM once, it does not need to be cleaned up as part of any lab completion.</font></strong>
 
-Deploying CentOS
+部署 CentOS
 ++++++++++++++++
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Create VM**.
+在 **Prism Central** > 选择 :fa:`bars` **> Virtual Infrastructure > VMs**, 并点击 **Create VM**.
 
-Fill out the following fields:
+填写以下字段:
 
 - **Name** - *Initials*-Linux-ToolsVM
 - **Description** - (Optional) Description for your VM.
@@ -28,11 +28,11 @@ Fill out the following fields:
 - **Number of Cores per vCPU** - 2
 - **Memory** - 2 GiB
 
-- Select **+ Add New Disk**
+- 选择 **+ Add New Disk**
     - **Type** - DISK
     - **Operation** - Clone from Image Service
     - **Image** - CentOS7.qcow2
-    - Select **Add**
+    - 选择 **Add**
 
 .. -------------------------------------------------------------------------------------
 .. The Below as soon as 5.11 is GA and we want to run that version for our workshops!!!!
@@ -47,23 +47,23 @@ Fill out the following fields:
 .. -------------------------------------------------------------------------------------
 
 
-- Select **Add New NIC**
+- 选择 **Add New NIC**
     - **VLAN Name** - Secondary
-    - Select **Add**
+    - 选择 **Add**
 
-Click **Save** to create the VM.
+点击 **Save** 创建 VM.
 
-Power on the VM.
+给这个VM开机。
 
-Installing Tools
+安装工具
 ++++++++++++++++
 
-Login to the VM via ssh or Console session, using the following credentials:
+使用以下凭据通过ssh或控制台会话登录到VM：
 
 - **Username** - root
 - **password** - nutanix/4u
 
-Install the software needed by running the following commands:
+通过运行以下命令来安装所需的软件：
 
 .. code-block:: bash
 
@@ -73,10 +73,10 @@ Install the software needed by running the following commands:
   npm install -g express
 
 
-Configuring NTP
+配置 NTP
 ...............
 
-Enable and configure NTP by running the following commands:
+通过运行以下命令来启用和配置NTP:
 
 .. code-block:: bash
 
@@ -85,10 +85,10 @@ Enable and configure NTP by running the following commands:
   ntpdate -u -s 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org
   systemctl restart ntpd
 
-Disabling Firewall and SELinux
+关闭防火墙和SELinux
 ..............................
 
-Disable the firewall and SELinux by running the following commands:
+通过运行如下命令关闭防火墙和SELinux:
 
 .. code-block:: bash
 
@@ -97,10 +97,10 @@ Disable the firewall and SELinux by running the following commands:
   setenforce 0
   sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
 
-Installing Python
+安装 Python
 .................
 
-Install Python by running the following commands:
+通过如下命令行运行Python:
 
 .. code-block:: bash
 
