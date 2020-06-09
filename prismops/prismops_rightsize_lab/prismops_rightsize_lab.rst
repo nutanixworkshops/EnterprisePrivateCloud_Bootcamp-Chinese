@@ -11,7 +11,7 @@ Prism Ops为客户的日常IT操作带来了智能自动化。 典型的操作�
 实验设置
 +++++++++
 
-＃ 打开您的 **Prism Central** 并导航至 **VMs** 页面。 记下 **GTSPrismOpsLabUtilityServer** 的IP地址。 在整个实验过程中，您将需要访问此IP地址。
+＃. 打开您的 **Prism Central** 并导航至 **VMs** 页面。 记下 **GTSPrismOpsLabUtilityServer** 的IP地址。 在整个实验过程中，您将需要访问此IP地址。
 
    .. figure:: images/init1.png
 
@@ -39,7 +39,7 @@ Prism Ops使用X-FIT机器学习来检测和监视在托管集群中运行的VM�
   * **Constrained:** 增加资源可以提高性能的vm。
   * **Bully:** 该虚拟机被标识为使用了大量资源并影响其他虚拟机。
 
-#. 选择 :fa:`bars` **> Dashboard ** (如果还没有)。
+#. 选择 :fa:`bars` **> Dashboard** (如果还没有)。
 
 #. 在仪表板上，查看 **VM Efficiency** 小部件。 该小部件提供了Prism Ops的X-FIT机器学习在您的环境中检测到的低效VM的摘要。 单击小部件底部的 **View All Inefficeint VMs** 链接，以进行更仔细的查看。
 
@@ -87,7 +87,7 @@ Prism Ops使用X-FIT机器学习来检测和监视在托管集群中运行的VM�
 
    .. figure:: images/rs2.png
 
-#.  使用搜索栏导航到 **Action Gallery** 。
+#. 使用搜索栏导航到 **Action Gallery** 。
 
    .. figure:: images/rs3.png
 
@@ -134,15 +134,15 @@ Prism Ops使用X-FIT机器学习来检测和监视在托管集群中运行的VM�
 
    .. figure:: images/rs10.png
 
-#.  首先，我们要为此警报生成工单。 点击左侧的“Add Action”，然后选择 **_缩写_ - Generate Service Ticket** 操作。 注意：在本实验中，我们建立了自己的工单系统以说明完整的工作流程。 您可能会注意到，有一个ServiceNow操作可以实现相同的工作流程，但专门针对ServiceNow。
+#. 首先，我们要为此警报生成工单。 点击左侧的“Add Action”，然后选择 **_缩写_ - Generate Service Ticket** 操作。 注意：在本实验中，我们建立了自己的工单系统以说明完整的工作流程。 您可能会注意到，有一个ServiceNow操作可以实现相同的工作流程，但专门针对ServiceNow。
 
    .. figure:: images/rs11.png
 
-#.  请注意，**Generate Service Ticket** 操作中的详细信息会自动为您填充。
+#. 请注意，**Generate Service Ticket** 操作中的详细信息会自动为您填充。
 
    .. figure:: images/rs12.png
 
-#.  接下来，我们想通知某人该工单是由X-Play创建的。 点击 **Add Action** ，然后选择 **Email** 操作。 根据示例填写电子邮件操作中的字段。
+#. 接下来，我们想通知某人该工单是由X-Play创建的。 点击 **Add Action** ，然后选择 **Email** 操作。 根据示例填写电子邮件操作中的字段。
 
    ::
 
@@ -191,7 +191,7 @@ Prism Ops使用X-FIT机器学习来检测和监视在托管集群中运行的VM�
 
    - **Recipient:** - 输入你的电子邮件地址。
    - **Subject :** - ``Playbook {{playbook.playbook_name}} 已执行。``
-   - **Message:**``{{playbook.playbook_name}} 已执行并将1GiB的内存添加到VM {{trigger[0].source_entity_info.name}}.``
+   - **Message:** ``{{playbook.playbook_name}} 已执行并将1GiB的内存添加到VM {{trigger[0].source_entity_info.name}}.``
 
    .. note::
 

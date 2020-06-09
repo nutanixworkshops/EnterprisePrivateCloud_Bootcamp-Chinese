@@ -81,12 +81,11 @@ AHV将Open vSwitch（OVS）用于所有VM网络。 OVS是在Linux内核中实现
 
    .. figure:: images/network_config_03.png
 
-
-    请注意，AHV能够提供集成的DHCP服务（IPAM），允许虚拟化管理员从配置的池中为虚拟机分配IP，或者在向虚拟机添加虚拟NIC时轻松地将IP指定为DHCP保留。
+   请注意，AHV能够提供集成的DHCP服务（IPAM），允许虚拟化管理员从配置的池中为虚拟机分配IP，或者在向虚拟机添加虚拟NIC时轻松地将IP指定为DHCP保留。
 
 #. 点击 **Save**.
 
-  现在，配置的虚拟网络将在群集中的所有节点上可用。 AHV中的虚拟网络的行为类似于ESXi中的分布式虚拟交换机，这意味着您无需在群集中的每个主机上配置相同的设置。
+   现在，配置的虚拟网络将在群集中的所有节点上可用。 AHV中的虚拟网络的行为类似于ESXi中的分布式虚拟交换机，这意味着您无需在群集中的每个主机上配置相同的设置。
 
 #. 关闭 **Network Configuration** 窗口。
 
@@ -139,7 +138,7 @@ AHV将Open vSwitch（OVS）用于所有VM网络。 OVS是在Linux内核中实现
 
    .. figure:: images/11.png
 
-  在以前的基础架构中，Carol遇到了新创建的VM网络无法正常工作的问题，并且不得不与网络管理员同行进行冗长的故障排除会话，以查明问题的根源。 借助AHV，Carol可以轻松地可视化已配置的虚拟机的完整网络路径。
+   在以前的基础架构中，Carol遇到了新创建的VM网络无法正常工作的问题，并且不得不与网络管理员同行进行冗长的故障排除会话，以查明问题的根源。 借助AHV，Carol可以轻松地可视化已配置的虚拟机的完整网络路径。
 
 #. 通过从 **Prism Element** 下拉菜单中选择 **Network** 页面并按VLAN或VM名称进行过滤来自己尝试。
 
@@ -148,13 +147,12 @@ AHV将Open vSwitch（OVS）用于所有VM网络。 OVS是在Linux内核中实现
 启动用户自助服务
 ++++++++++++++++++++++++++
 
-虽然Prism和 ``acli`` 提供了用于创建VM的简单工作流，但Carol经常被这些请求所淹没，并且希望将自己的更多时间用于现代化组织老化的基础架构的其他部分以及参加儿子的足球比赛。
+   虽然Prism和 ``acli`` 提供了用于创建VM的简单工作流，但Carol经常被这些请求所淹没，并且希望将自己的更多时间用于现代化组织老化的基础架构的其他部分以及参加儿子的足球比赛。
 
-在以下练习中，Carol将使用自己的私有云，并利用Prism Central中的本机功能为用户提供IaaS自助服务。
+   在以下练习中，Carol将使用自己的私有云，并利用Prism Central中的本机功能为用户提供IaaS自助服务。
+#. 返回 **Prism Element** 的 **Home** 页面。
 
-＃. 返回 **Prism Element** 的 **Home** 页面。
-
-＃. 通过单击 **Launch** 按钮并使用以下凭据登录来访问 **Prism Central** ：
+#. 通过单击 **Launch** 按钮并使用以下凭据登录来访问 **Prism Central** ：
 
 
    - **User Name** - admin
@@ -334,7 +332,7 @@ Nutanix Calm允许您跨私有（AHV，ESXi）和公共云（AWS，Azure，GCP�
 
 请注意，只有 **Operator02** 有权访问 **Calm** 项目，而不是所有的Operator帐户。
 
-Staging Blueprints
+准备 Blueprints
 ==================
 
 蓝图是使用Nutanix Calm建模的每个应用程序的框架。蓝图是模板，描述了在已创建的服务和应用程序上置备，配置和执行任务所需的所有步骤。蓝图还定义了应用程序及其基础结构的生命周期，从创建应用程序到在应用程序上执行的操作（更新软件，向外扩展等）直到应用程序终止。
@@ -346,7 +344,7 @@ Staging Blueprints
 
 #. `下载 Fiesta-Multi Blueprint， 右击 <https://raw.githubusercontent.com/nutanixworkshops/ts2020/master/pc/dayinlife/Fiesta-Multi.json>`_.
 
-#. 从 **Prism Central > Calm**页面, 选择 **Blueprints** 从左边菜单点击 **Upload Blueprint**.
+#. 从 **Prism Central > Calm** 页面, 选择 **Blueprints** 从左边菜单点击 **Upload Blueprint**.
 
    .. figure:: images/25.png
 
@@ -562,11 +560,11 @@ Carol鼓励丹Dan进行以下练习，以使他能够通过Prism在Fiesta项目�
 
 
 
-＃选择 **Focus** 下拉列表以访问不同的开箱即用视图。应该使用哪个视图来了解您的VM是否包含在灾难恢复计划中？
+#. 选择 **Focus** 下拉列表以访问不同的开箱即用视图。应该使用哪个视图来了解您的VM是否包含在灾难恢复计划中？
 
-＃单击 **Focus > + Add Custom** CPU使用率**， **CPU Usage**, **CPU Ready Time**, **IO Latency**, **Working Set Size Read**, and **Working Set Size Write**.。这样的视图可以用来帮助发现VM性能问题。
+#. 单击 **Focus > + Add Custom** CPU使用率**， **CPU Usage**, **CPU Ready Time**, **IO Latency**, **Working Set Size Read**, and **Working Set Size Write**.。这样的视图可以用来帮助发现VM性能问题。
 
-＃要充分了解Prism Central在搜索，排序和分析实体方面的功能，请观看以下简短视频：
+#. 要充分了解Prism Central在搜索，排序和分析实体方面的功能，请观看以下简短视频：
 
 
 
@@ -599,4 +597,4 @@ Carol鼓励丹Dan进行以下练习，以使他能够通过Prism在Fiesta项目�
 
 在不到2小时的时间内，我们向您展示了Prism如何为虚拟基础架构管理员提供无摩擦的体验，涉及部署存储，网络和工作负载，监视环境以及更新软件。 您已经了解了如何将本机Prism Central功能与Active Directory结合使用，以控制访问权限并为非管理员角色启用自助服务。 此外，您还通过Nutanix Calm为私有云启用了丰富的应用程序自动化功能。
 
-但是，私有云并非仅建立在IaaS，自助服务和应用程序自动化之上。 在接下来的实验室中，您将看到Nutanix如何在其基础上通过其附加的 **Prism Pro** 功能提供先进的监视和操作功能，通过 **Files**合并存储技术，通过 **Flow** 进行本机微分段。 还有更多！
+但是，私有云并非仅建立在IaaS，自助服务和应用程序自动化之上。 在接下来的实验室中，您将看到Nutanix如何在其基础上通过其附加的 **Prism Pro** 功能提供先进的监视和操作功能，通过 **Files** 融合存储技术，通过 **Flow** 进行本机微分段。 还有更多！

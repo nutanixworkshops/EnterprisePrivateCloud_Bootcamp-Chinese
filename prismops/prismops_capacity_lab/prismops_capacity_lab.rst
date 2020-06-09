@@ -39,7 +39,7 @@ Prism Pro为我们的客户的日常IT操作带来了智能自动化。典型的
 
 #. 单击 **Prism-Pro-Cluster** 集群。
 
-. 现在您可以查看资源倒计时上的存储、CPU和内存。
+   现在您可以查看资源倒计时上的存储、CPU和内存。
 
    .. figure:: images/ppro_12.png
 
@@ -109,7 +109,7 @@ Prism Pro的X-FIT引擎还提供了规划未来工作负载的能力，并确定
 
    .. figure:: images/cap4.png
 
-#.  首先，我们要为此警报生成一个预测报告。 点击左侧的 **Add Action**，然后选择 **Generate Forecast Report** 操作。
+#. 首先，我们要为此警报生成一个预测报告。 点击左侧的 **Add Action**，然后选择 **Generate Forecast Report** 操作。
 
    .. figure:: images/cap5.png
 

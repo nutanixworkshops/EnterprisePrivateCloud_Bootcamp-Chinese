@@ -147,54 +147,12 @@ Nutanix Files 整合您的存储系统
 
 .. figure:: images / 5.png
 
-   -在Files群集的部署过程中， **NTNXLAB \\ Administrator** 用户被默认指定为文件管理员，默认情况下，授予该用户对所有共享的读/写访问权限。
+在Files群集的部署过程中， **NTNXLAB \\ Administrator** 用户被默认指定为文件管理员，默认情况下，授予该用户对所有共享的读/写访问权限。
 
-   -管理其他用户的访问权限与任何其他SMB共享的方式相同。
-
-
-5. 在 ``\\ BootcampFS.ntnxlab.local \`` 中，右键单击 *Initials* \ **-FiestaShare> Properties** 。
-
-6. 选择 **Security **选项卡，然后单击 **Advanced** 。
-
-.. figure:: images / 6.png
+管理其他用户的访问权限与任何其他SMB共享的方式相同。
 
 
-7. 选择 **Users（BootcampFS \\ Users**，然后单击 **Remove** 。
-
-
-8. 点击 **Add** 。
-
-
-9. 单击 **Select a principal**，然后在 **Object Name ** 字段中指定 **Everyone** 。点击 **OK** 。
-
-
-.. figure:: images / 7.png
-
-
-10. 填写以下字段，然后单击 **OK** ：
-
-      - **Type** -允许
-
-      - **Applies to** -仅此文件夹
-
-      -选择 **Read & execute** 
-
-      -选择 **List folder contents** 
-
-      -选择 **Read** 
-
-      -选择 **Write** 
-
-.. figure:: images / 8.png
-
-
-11. 单击 **OK > OK > OK** 以保存权限更改。
-
-
-   现在，所有用户都可以在 *Initials* \ **-FiestaShare** 共享中创建文件夹和文件。
-
-
-12. 打开 **PowerShell** 并尝试通过执行以下命令来创建文件类型被设定为被阻止的文件：
+5. 打开 **PowerShell** 并尝试通过执行以下命令来创建文件类型被设定为被阻止的文件：
 
 .. code-block:: PowerShell
 
@@ -204,7 +162,7 @@ Nutanix Files 整合您的存储系统
 观察到创建新文件被拒绝。
 
 
-13. 返回 **Prism Element > File Server > Share/Expor** ，选择您的共享。查看 **Share Details** ， **Usage** 和 **Performance** 选项卡，以了解每个共享的高级信息，包括文件和连接的数量，一段时间内的存储利用率，延迟，吞吐量和IOPS。
+6. 返回 **Prism Element > File Server > Share/Expor** ，选择您的共享。查看 **Share Details** ， **Usage** 和 **Performance** 选项卡，以了解每个共享的高级信息，包括文件和连接的数量，一段时间内的存储利用率，延迟，吞吐量和IOPS。
 
 
 .. figure:: images / 11.png
