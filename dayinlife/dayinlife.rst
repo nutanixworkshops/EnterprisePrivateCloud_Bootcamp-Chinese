@@ -342,7 +342,7 @@ Nutanix Calm允许您跨私有（AHV，ESXi）和公共云（AWS，Azure，GCP�
 虽然开发人员用户可以创建和发布自己的蓝图，但Carol希望提供团队使用的通用Fiesta项目蓝图。
 
 
-#. `下载 Fiesta-Multi Blueprint， 右击 <https://raw.githubusercontent.com/nutanixworkshops/ts2020/master/pc/dayinlife/Fiesta-Multi.json>`_.
+#. `下载 Fiesta-Multi Blueprint， 右击 <https://github.com/nutanixworkshops/EnterprisePrivateCloud_Bootcamp-Chinese/blob/master/dayinlife/Fiesta-Multi.json>`_.
 
 #. 从 **Prism Central > Calm** 页面, 选择 **Blueprints** 从左边菜单点击 **Upload Blueprint**.
 
