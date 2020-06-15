@@ -11,11 +11,11 @@ Prism Ops为客户的日常IT操作带来了智能自动化。 典型的操作�
 实验设置
 +++++++++
 
-＃. 打开您的 **Prism Central** 并导航至 **VMs** 页面。 记下 **GTSPrismOpsLabUtilityServer** 的IP地址。 在整个实验过程中，您将需要访问此IP地址。
+＃. 打开您的 **Prism Central** 并导航至 **VMs** 页面。 记下 **PrismOpsLabUtilityServer** 的IP地址。 在整个实验过程中，您将需要访问此IP地址。
 
    .. figure:: images/init1.png
 
-#. 在浏览器中打开一个新标签，然后浏览至http://`<GTSPrismOpsLabUtilityServer_IP_ADDRESS>`/alerts [示例 http://10.42.113.52/alerts]。 如果您是第一个使用该虚拟机的人，则可能需要登录该虚拟机。 在这种情况下，请填写 **Prism Central IP** （从分配电子表格中，而不是我们刚刚记录的IP），**Username** 和 **Password**，然后单击 **Login**。
+#. 在浏览器中打开一个新标签，然后浏览至 http://`<PrismOpsLabUtilityServer_IP_ADDRESS>`/alerts  [示例 http://10.38.17.12/alerts]。 如果您是第一个使用该虚拟机的人，则可能需要登录该虚拟机。 在这种情况下，请填写 **Prism Central IP** （从分配电子表格中，而不是我们刚刚记录的IP），**Username** 和 **Password**，然后单击 **Login**。
 
    .. figure:: images/init2.png
 
@@ -23,7 +23,7 @@ Prism Ops为客户的日常IT操作带来了智能自动化。 典型的操作�
 
    .. figure:: images/init2b.png
 
-#. 在新标签中，导航至 http://`<GTSPrismOpsLabUtilityServer_IP_ADDRESS>`/ 从 [示例 http://10.42.113.52/]完成实验。 除非另有明确说明，否则使用此选项卡可以完成实验。
+#. 在新标签中，导航至 http://`<PrismOpsLabUtilityServer_IP_ADDRESS>`/ 从 [示例 http://10.38.17.12/]完成实验。 除非另有明确说明，否则使用此选项卡可以完成实验。
 
    .. figure:: images/init3.png
 
@@ -39,13 +39,13 @@ Prism Ops使用X-FIT机器学习来检测和监视在托管集群中运行的VM�
   * **Constrained:** 增加资源可以提高性能的vm。
   * **Bully:** 该虚拟机被标识为使用了大量资源并影响其他虚拟机。
 
-#. 选择 :fa:`bars` **> Dashboard** (如果还没有)。
+#. 在 **Prism Central** 界面,选择 :fa:`bars` **> Dashboard** (如果还没有)。
 
 #. 在仪表板上，查看 **VM Efficiency** 小部件。 该小部件提供了Prism Ops的X-FIT机器学习在您的环境中检测到的低效VM的摘要。 单击小部件底部的 **View All Inefficeint VMs** 链接，以进行更仔细的查看。
 
    .. figure:: images/ppro_58.png
 
-#. 您现在正在查看效率焦点。 *Efficiency detail* 列列出了为何Prism Ops将每个VM标记为效率低下的细节。 您可以将文本悬停在 *Efficiency detail* 列中，以查看完整的描述。
+#. 现在，您将在VM列表视图中查看Efficiency聚集视图，并详细了解为何Prism Pro标记了这些VM。 您可以将鼠标悬停在Efficiency detail列中的文本以查看完整的描述。
 
    .. figure:: images/ppro_59.png
 
@@ -79,7 +79,7 @@ Prism Ops使用X-FIT机器学习来检测和监视在托管集群中运行的VM�
 
 现在让我们看一下如何采取自动化措施来解决其中的一些低效率问题。 在本实验中，我们将假定此VM受内存限制，并说明如何自动修复此VM的正确资源配置。 我们还将使用自定义工单系统来说明如何将这种典型工作流程与工单系统（例如ServiceNow）集成。
 
-#. 导航至您的 **_ 姓名缩写_-LinuxToolsVM**。 这些示例将使用名为 **ABC-VM** 的虚拟机。
+#. 导航至您的 **`姓名缩写`-LinuxToolsVM**。 这些示例将使用名为 **ABC-VM** 的虚拟机。
 
    .. figure:: images/rs1.png
 
@@ -87,36 +87,83 @@ Prism Ops使用X-FIT机器学习来检测和监视在托管集群中运行的VM�
 
    .. figure:: images/rs2.png
 
-#. 使用搜索栏导航到 **Action Gallery** 。
+#. 使用汉堡包菜单，导航至 **Operations** > **Playbooks**.
 
    .. figure:: images/rs3.png
 
-#. 选择 **REST API** 操作，然后从操作菜单中选择 **Clon** 操作。
+#. 我们将需要创建几个Playbook，以实现此工作流程。 让我们先点击 **Create Playbook** 。 我们将首先创建Playbook，该Playbook将增加VM的内存。
 
+   .. figure:: images/rs3b.png
+
+#. 选择“ Webhook”作为触发器。 使用此触发器将公开一个公共API，该API允许脚本和第三方工具（例如ServiceNow）使用此Webhook回调Prism Central并触发此Playbook。 在我们的情况下，工单系统将调用此Playbook来启动修复步骤。
+
+   .. figure:: images/rs16.png
+
+#. 点击左侧的 **Add Action** 项。
+
+   .. figure:: images/rs17.png
+
+#. 接下来，我们要选择 **VM Add Memory** 操作。
+
+   .. figure:: images/rs18.png
+
+#. 使用 **Parameters** 链接来填充从Webhook触发器公开的 **entity1** 参数。 调用方将传入VM以充当entity1。 根据以下屏幕设置其余字段。 然后点击 **Add Action** 以添加下一个操作。
+   .. figure:: images/rs19.png
+
+#. Select the **Resolve Alert** action.
+
+   .. figure:: images/rs19b.png
+
+#. 使用 **Parameters** 链接来填充从Webhook触发器公开的 **entity2** 参数。 调用方将传递警报以将其解析为entity2。 然后单击 **Add Action** ，然后选择Email操作。
+
+   .. figure:: images/rs19c.png
+
+#. 填写电子邮件操作中的字段。 这里是例子。
+
+   - **Recipient:** - Fill in your email address.
+   - **Subject:** - ``Playbook {{playbook.playbook_name}} was executed.``
+   - **Message:** - ``{{playbook.playbook_name}} has run and has added 1GiB of Memory to the VM {{trigger[0].entity1.name}}.``
+
+   .. note::
+
+     欢迎您撰写您自己的主题信息。 以上仅是示例。 您可以使用 “parameters” 来丰富消息。
+
+   .. figure:: images/rs20.png
+#. 最后，我们想返回工单服务以解决工单服务中的工单。 单击 **Add Action** 以添加REST API操作。 填写以下值，替换URL字段中的 <PrismOpsLabUtilityServer_IP_ADDRESS> 。
+
+   - **Method:** PUT
+   - **URL:** http://<PrismOpsLabUtilityServer_IP_ADDRESS>/resolve_ticket
+   - **Request Body:** ``{"incident_id":"{{trigger[0].entity1.uuid}}"}``
+   - **Request Header:** Content-Type:application/json;charset=utf-8
+
+   .. figure:: images/rs21.png
+#. 单击 **Save & Close** 按钮，并将其保存为名称 “*姓名缩写* - Resolve Service Ticket”。 **请确保启用 ‘Enabled’ 选项。**
+
+   .. figure:: images/rs22.png
+#. 接下来，我们将创建一个自定义动作以在我们的第二本Playbook中使用。 点击左侧菜单中的 **Action Gallery** 。
+
+   .. figure:: images/rs3c.png
+
+#. 选择 **REST API** 操作，然后从操作菜单中选择 **Clone** 操作。
    .. figure:: images/rs4.png
 
-#. 我们正在创建一个操作，以后可以在Playbook中使用它来生成服务工单。 填写以下值，然后单击 **Copy** 。
+#. 填写以下值，替换 *姓名缩写* 部分，并在URL字段中输入<PrismOpsLabUtilityServer_IP_ADDRESS>。 点击 **Copy** 。
 
-   - **Name:** *姓名缩写* - 生成服务工单
+   - **Name:** *Initials* - Generate Service Ticket
    - **Method:** POST
-   - **URL:** http://<GTSPrismOpsLabUtilityServer_IP_ADDRESS>/generate_ticket/
-   - **Request Body:**
-
-   ::
-
-     ``{"vm_name":"{{trigger[0].source_entity_info.name}}","vm_id":"{{trigger[0].source_entity_info.uuid}}","alert_name":"{{trigger[0].alert_entity_info.name}}","alert_id":"{{trigger[0].alert_entity_info.uuid}}"}``
-
-   - **Request Header:**
-
-   ::
-
-   Content-Type:application/json;charset=utf-8
+   - **URL:** http://<PrismOpsLabUtilityServer_IP_ADDRESS>/generate_ticket/
+   - **Request Body:** ``{"vm_name":"{{trigger[0].source_entity_info.name}}","vm_id":"{{trigger[0].source_entity_info.uuid}}","alert_name":"{{trigger[0].alert_entity_info.name}}","alert_id":"{{trigger[0].alert_entity_info.uuid}}", "webhook_id":"<ENTER_ID_HERE>","string1":"Request 1GiB memory increase."}``
+   - **Request Header:** Content-Type:application/json;charset=utf-8
 
    .. figure:: images/rs5.png
-
-#. 使用搜索栏导航到 **Playbooks**.
+#. 现在，通过点击左侧菜单中的 **List** 项，切换到Playbooks列表。
 
    .. figure:: images/rs6.png
+
+#. 我们将需要从创建的第一本Playbook复制Webhook ID，以便可以在generate ticket 步骤中传递它。 打开您的Resolve Service Ticket Playbook，然后将Webhook ID复制到剪贴板。
+
+   .. figure:: images/rs6a.png
+
 
 #. 现在，我们将创建一个Playbook，以自动生成服务工单。 点击表格视图顶部的 **Create Playbook** 。
 
@@ -134,85 +181,23 @@ Prism Ops使用X-FIT机器学习来检测和监视在托管集群中运行的VM�
 
    .. figure:: images/rs10.png
 
-#. 首先，我们要为此警报生成工单。 点击左侧的“Add Action”，然后选择 **_缩写_ - Generate Service Ticket** 操作。 注意：在本实验中，我们建立了自己的工单系统以说明完整的工作流程。 您可能会注意到，有一个ServiceNow操作可以实现相同的工作流程，但专门针对ServiceNow。
+#. 首先，我们要为此警报生成工单。 点击左侧的 **Add Action** ，然后选择您创建的 **Generate Service Ticket** 操作。 请注意，您创建的 **Generate Service Ticket** 操作中的详细信息会自动为您填写。 继续，并用复制到剪贴板的Webhook ID替换 ** <ENTER_ID_HERE> ** 文本。
 
    .. figure:: images/rs11.png
 
-#. 请注意，**Generate Service Ticket** 操作中的详细信息会自动为您填充。
+#. 接下来，我们想通知管理员该工单是由X-Play创建的。 点击 **Add Action** ，然后选择Email操作。 填写Email操作中的字段。 这里是例子。 确保将消息中的<PrismOpsLabUtilityServer_IP_ADDRESS>替换为其IP地址。
 
-   .. figure:: images/rs12.png
-
-#. 接下来，我们想通知某人该工单是由X-Play创建的。 点击 **Add Action** ，然后选择 **Email** 操作。 根据示例填写电子邮件操作中的字段。
-
-   ::
-
-      确保将消息中的<GTSPrismOpsLabUtilityServer_IP_ADDRESS>替换为其IP地址。
-
-   - **Recipient:** - 输入你的电子邮件地址。
-   - **Subject :**
-
-   ::
-
-      ``Service Ticket Pending Approval: {{trigger[0].alert_entity_info.name}}``
-
-   - **Message:**
-
-   ::
-
-     ``警报 {{trigger[0].alert_entity_info.name}} 触发了 Playbook {{playbook.playbook_name}} 并为虚拟机生成了服务工单: {{trigger[0].source_entity_info.name}} 等待您的批准。 已生成故障单供您在 http://<GTSPrismOpsLabUtilityServer_IP_ADDRESS>/ticketsystem上执行操作``
+   - **Recipient:** - Fill in your email address.
+   - **Subject :** - ``Service Ticket Pending Approval: {{trigger[0].alert_entity_info.name}}``
+   - **Message:** - ``The alert {{trigger[0].alert_entity_info.name}} triggered Playbook {{playbook.playbook_name}} and has generated a Service ticket for the VM: {{trigger[0].source_entity_info.name}} which is now pending your approval. A ticket has been generated for you to take action on at http://<PrismOpsLabUtilityServer_IP_ADDRESS>/ticketsystem``
 
    .. figure:: images/rs13.png
 
-#. 单击 **Save & Close** 按钮，并使用名称  **_姓名缩写_ - Generate Service Ticket for Constrained VM**。 **请确保单击选中 _Enabled_ 键。**
+#. 单击 **Save & Close** 按钮，并使用名称  **_姓名缩写_ - Generate Service Ticket for Constrained VM**。 **请确保单击选中 ‘Enabled’ 键。**
 
    .. figure:: images/rs14.png
 
-#. 现在，我们将再创建一个Playbook。 当我们通过向受影响的VM添加内存并在完成后发送电子邮件来解决服务工单时，将执行此操作。 点击表格视图顶部的 **Create Playbook**。
-
-   .. figure:: images/rs15.png
-
-#. 选择 **Manual** 作为触发器。 注意：我们为此实验创建建的工单系统将调用手动触发器提供的触发器API，但是该API不是公开的。 在5.17中，我们引入了Webhook触发器，该触发器将允许实现相同的行为。 诸如ServiceNow之类的工具可以使用此Webhook调用Prism Central来触发Playbook。
-
-   .. figure:: images/rs16.png
-
-#. 从此下拉列表中选择 **VM** 实体类型，因为该Playbook将应用于VM。
-
-   .. figure:: images/rs17.png
-
-#. 单击左侧的 **Add Action** ，然后选择 **VM Add Memory** 操作。
-
-   .. figure:: images/rs18.png
-
-#. 根据以下屏幕设置空白字段。 接下来，我们想通知某人已采取了自动操作。 点击 **Add Action** 以添加电子邮件操作.
-
-   .. figure:: images/rs19.png
-
-#. 根据示例，填写电子邮件操作中的字段
-
-   - **Recipient:** - 输入你的电子邮件地址。
-   - **Subject :** - ``Playbook {{playbook.playbook_name}} 已执行。``
-   - **Message:** ``{{playbook.playbook_name}} 已执行并将1GiB的内存添加到VM {{trigger[0].source_entity_info.name}}.``
-
-   .. note::
-
-      欢迎您撰写您自己的主题信息。 以上仅是示例。 您可以单击 *Parameters* 以进一步自定义消息。
-
-   .. figure:: images/rs20.png
-
-#. 最后，我们想通知工单服务以解决工单。 单击 **Add Action** 以添加 *REST API* 操作。 在URL字段中填写以下值替换<GTSPrismOpsLabUtilityServer_IP_ADDRESS>。
-
-   - **Method:** PUT
-   - **URL:** http://<GTSPrismOpsLabUtilityServer_IP_ADDRESS>/resolve_ticket
-   - **Request Body:** ``{"vm_id":"{{trigger[0].source_entity_info.uuid}}"}``
-   - **Request Header:** Content-Type:application/json;charset=utf-8
-
-   .. figure:: images/rs21.png
-
-#. 单击 **Save & Close** 按钮，并将其保存为名称 “*姓名缩写* - Resolve Service Ticket”。 **请确保勾选 _Enabled_ 选项。**
-
-   .. figure:: images/rs22.png
-
-#. 现在让我们触发工作流。使用 **/alerts**  URL[例如10.42.113.52/alerts]导航到您在实验开始时打开的选项卡。选择限制 **VM Memory Constrained** 并选择您的VM。点击 **Simulate Alert** 按钮。这将在VM上模拟内存受限警报。
+#. 现在让我们触发工作流程。 使用 **/alerts** URL [例如 10.38.17.12/alerts] 导航到在设置中打开的标签。 选择 **VM Memory Constrained** ，然后输入您的VM。 单击 **Simulate Alert** 按钮。 这将在您的VM上模拟内存受限警报。
 
    .. figure:: images/rs23.png
 
@@ -220,19 +205,15 @@ Prism Ops使用X-FIT机器学习来检测和监视在托管集群中运行的VM�
 
    .. figure:: images/rs24.png
 
-#. 在电子邮件中，单击链接以访问工单系统。 或者，您可以通过从浏览器的新选项卡导航到 http://`<GTSPrismOpsLabUtilityServer_IP_ADDRESS>`/ticketsystem 来直接访问工单系统。
+#. 在电子邮件中，单击链接以访问工单系统。 或者，您可以通过从浏览器的新选项卡导航到 http://`<PrismOpsLabUtilityServer_IP_ADDRESS>`/ticketsystem 来直接访问工单系统。
 
    .. figure:: images/rs25.png
 
-#. 确定为您的VM创建的工单，然后单击垂直点图标以显示操作菜单。 点击 **Run Playbook** 选项。
+#. 确定为您的VM创建的工单，然后单击垂直点图标以显示操作菜单。 点击 **Trigger Remediation** 选项。 这将调用REST API中传递的Webhook来生成服务工单，这将触发Resolve Service Ticket Playbook。 它将传递触发工作流程的VM和Alert的信息。
 
    .. figure:: images/rs26.png
 
-#. 选择您创建的第二个Playbook **_姓名缩写_ - Resolve Service Ticket** ，然后单击 **Submit**。
-
-   .. figure:: images/rs27.png
-
-#. 打开Prism Central控制台，切换回上一个选项卡。 **_姓名缩写_ - Resolve Service Ticket** playbook，然后单击视图顶部的 **Plays** 标签以查看为此Playbook执行的Playbook。 单击表中的Plays标题，以进行仔细查看。
+#.  打开Prism Central控制台，切换回上一个选项卡。 打开 **`姓名缩写` - Resolve Service Ticket** Playbook的详细信息，然后单击视图顶部的 **Plays** 选项卡以查看为此操作执行的Playbook。 单击表格中 **Plays** 的标题以进行仔细查看。
 
    .. figure:: images/rs29.png
 

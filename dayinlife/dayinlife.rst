@@ -243,7 +243,7 @@ Carol需要支持在Fiesta团队中工作的两种类型的用户：需要为测
 
    - **Role Name** - *Initials*\ -SmoothOperator
    - **Description** - Limited operator accounts
-   - **App** - No Access
+   - **App** - Set custom permissions
    - **VM** - Edit Access
    -  **不要** 选择 **Allow VM Creation**
 
@@ -306,7 +306,7 @@ Nutanix Calm允许您跨私有（AHV，ESXi）和公共云（AWS，Azure，GCP�
 
    - 点击 :fa:`star` 标记 *Primary* 作为默认的网络。
 
-   - 在 **Users, Groups, and Roles**下, 选择 **+ User**
+   - 在 **Users, Groups, and Roles** 下, 选择 **+ User**
 
       - **Name** - SSP Developers
       - **Role** - Developer
@@ -342,7 +342,7 @@ Nutanix Calm允许您跨私有（AHV，ESXi）和公共云（AWS，Azure，GCP�
 虽然开发人员用户可以创建和发布自己的蓝图，但Carol希望提供团队使用的通用Fiesta项目蓝图。
 
 
-#. `下载 Fiesta-Multi Blueprint， 右击 <https://github.com/nutanixworkshops/EnterprisePrivateCloud_Bootcamp-Chinese/blob/master/dayinlife/Fiesta-Multi.json>`_.
+#. `下载 Fiesta-Multi Blueprint， 右击 <https://github.com/Nutanix-APJ/EnterprisePrivateCloud_Bootcamp-Chinese/blob/master/dayinlife/Fiesta-Multi.json>`_.
 
 #. 从 **Prism Central > Calm** 页面, 选择 **Blueprints** 从左边菜单点击 **Upload Blueprint**.
 
